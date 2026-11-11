@@ -57,7 +57,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="pad"><div class="mu cap">Penyimpanan lokal</div><div id="flist"></div><div class="mu cap">Cadangan</div>
 <button class="btn" id="ea"><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></button>
 <button class="btn" id="ia"><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></button>
-<input type="file" id="imp" accept=".zip,application/zip" hidden><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p></div></section>
+<input type="file" id="imp" accept=".zip,application/zip" hidden><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v6</p></div></section>
 
 <section class="scr" id="chap"><div class="hd"><button class="ib" id="cb">←</button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs">⌕</button><button class="ib" id="ca">＋</button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari &amp; Ganti</button><button class="btn" id="cn2">Catatan Proyek</button></div></section>
@@ -258,5 +258,5 @@ $('#np').onclick=newP;$('#ea').onclick=async()=>expo(await tx('projects','readon
 $$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
 
 (async()=>{db=await open();const s=await tx('settings','readonly',x=>x.get('cfg'));if(s)cfg={...DEF,...s.v};applyCfg();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();show('lib');
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})})();
+if('serviceWorker' in navigator){const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had)flush().then(()=>location.reload())})}})();
 </script></body></html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#3f5f8f">
 <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <title>LocalWriter</title>
@@ -238,6 +238,9 @@ $('#nta').oninput=()=>{clearTimeout(nt2);nt2=setTimeout(()=>put('texts',{id:'n_'
 $('#fg').onclick=()=>frun(0);$('#fa').onclick=()=>frun(1);$('#fx2').onclick=()=>$('#fr').classList.remove('on');
 $('#cf').onclick=()=>{$('#frr').textContent='';$('#fr').classList.add('on')};
 $('#cn2').onclick=notesOpen;$('#nx').onclick=notesClose;$('#hi').onclick=hist;
+
+/* ===== Ikut naik saat keyboard aktif ===== */
+if(window.visualViewport){const vv=visualViewport,f=()=>{document.body.style.height=vv.height+'px';scrollTo(0,0)};vv.addEventListener('resize',f);vv.addEventListener('scroll',f)}
 
 /* ===== Event ===== */
 $('#ta').oninput=$('#ct').oninput=touch;$('#ta').onblur=flush;

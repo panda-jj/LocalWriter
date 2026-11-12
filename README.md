@@ -11,9 +11,9 @@ Aplikasi menulis novel yang ringan, simpel, dan bisa dipakai **offline** di HP. 
 - **Penyimpanan otomatis yang tidak mengganggu.** Tulisan disimpan setelah kamu berhenti mengetik sebentar, saat pindah bab, dan saat aplikasi ditutup, bukan setiap kata.
 - **Mode Fokus** untuk menulis tanpa tombol.
 - **Pengaturan teks:** font (Merriweather, Tinos, Lato, Sans-serif, Monospace), ukuran, jarak baris, perataan, dan tema terang, gelap, atau sistem.
-- **Cari & Ganti** di seluruh bab dalam satu novel.
+- **Cari & Ganti** per bab dengan sorotan langsung di editor (ganti satu per satu atau semua di bab itu, bisa diurungkan), plus pencarian dan penggantian di semua bab.
 - **Riwayat versi** per bab (maksimal 5 versi terakhir), bisa dikembalikan kapan saja.
-- **Novel Notes:** daftar karakter (nama dan usia) serta catatan dunia dan lokasi untuk tiap novel. Ada juga **Catatan Bebas** untuk catatan teks biasa.
+- **Novel Notes:** daftar karakter (nama dan usia), catatan dunia dan lokasi, serta catatan teks bebas untuk tiap novel.
 - **Backup dan ekspor:**
   - ZIP per novel (satu file `.txt` per bab) atau semua novel sekaligus.
   - Satu file `.txt` untuk seluruh novel, atau satu bab saja.

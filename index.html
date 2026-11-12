@@ -5,6 +5,10 @@
 <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <title>LocalWriter</title>
 <style>
+@font-face{font-family:LWLato;font-weight:400;font-style:normal;font-display:swap;src:url(lato-400.woff2) format("woff2")}
+@font-face{font-family:LWLato;font-weight:700;font-style:normal;font-display:swap;src:url(lato-700.woff2) format("woff2")}
+@font-face{font-family:LWTinos;font-weight:400;font-style:normal;font-display:swap;src:url(tinos-400.woff2) format("woff2")}
+@font-face{font-family:LWTinos;font-weight:700;font-style:normal;font-display:swap;src:url(tinos-700.woff2) format("woff2")}
 :root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#6b7385;--ac:#3f5f8f;--ln:#e3e6ee;--sel:#dfe8fb;--ok:#2e8b57;--no:#c0702a;--fs:18px;--lh:1.6;--ff:Georgia,serif}
 [data-t=dark]{--bg:#12151c;--card:#1b2029;--tx:#e6e9f0;--mu:#8e97aa;--ac:#6f93cf;--ln:#2a313e;--sel:#26344d;--ok:#5cc08a;--no:#e0a060}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -61,7 +65,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="pad"><div class="mu cap">Penyimpanan lokal</div><div id="flist"></div><div class="mu cap">Cadangan</div>
 <button class="btn" id="ea"><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></button>
 <button class="btn" id="ia"><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></button>
-<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn" id="up"><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></button><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v10</p></div></section>
+<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn" id="up"><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></button><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v12</p></div></section>
 
 <section class="scr" id="chap"><div class="hd"><button class="ib" id="cb">←</button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs">⌕</button><button class="ib" id="ca">＋</button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari &amp; Ganti</button><button class="btn" id="cnn">Novel Notes</button><button class="btn" id="cn2">Catatan Bebas</button></div></section>
@@ -88,7 +92,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="ov" id="nt"><div class="sh"><div class="row"><b class="grow">Catatan Bebas</b><button class="ib" id="nx">✕</button></div><div class="mu">Tokoh, dunia cerita, alur. Tidak masuk hitungan bab.</div>
 <textarea id="nta" class="in" style="height:50dvh;margin-top:10px;font:15px/1.5 system-ui,sans-serif;resize:none"></textarea></div></div>
 <div class="ov" id="set"><div class="sh"><div class="row"><b class="grow">Pengaturan Teks</b><button class="ib" id="sx">✕</button></div>
-<label>Jenis Huruf<select id="sf"><option value="serif">Georgia (serif)</option><option value="book">Palatino</option><option value="sans">Sans-serif</option><option value="mono">Monospace</option></select></label>
+<label>Jenis Huruf<select id="sf"><option value="serif">Georgia (serif)</option><option value="book">Palatino</option><option value="sans">Sans-serif</option><option value="mono">Monospace</option><option value="tnr">Times New Roman</option><option value="lato">Lato</option></select></label>
 <label>Ukuran Huruf<select id="ss"></select></label>
 <label>Jarak Baris: <span id="slv"></span><input type="range" id="sl" min="1.2" max="2.2" step=".1"></label>
 <div class="l">Perataan Teks</div><div class="seg"><button data-a="left">Kiri</button><button data-a="center">Tengah</button><button data-a="right">Kanan</button><button data-a="justify">Rata</button></div>
@@ -96,7 +100,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="row" style="margin-top:16px"><button class="btn" id="sr">Atur Ulang</button><button class="btn pri" id="sd">Selesai</button></div></div></div>
 
 <script>
-const FF={serif:'Georgia,"Times New Roman",serif',book:'Palatino,"Palatino Linotype","Book Antiqua",serif',sans:'system-ui,-apple-system,sans-serif',mono:'ui-monospace,Menlo,Consolas,monospace'};
+const FF={tnr:'"Times New Roman",LWTinos,Times,serif',lato:'LWLato,system-ui,sans-serif',serif:'Georgia,"Times New Roman",serif',book:'Palatino,"Palatino Linotype","Book Antiqua",serif',sans:'system-ui,-apple-system,sans-serif',mono:'ui-monospace,Menlo,Consolas,monospace'};
 const DEF={ff:'serif',fs:18,lh:1.6,al:'left',th:'system'};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6),fmt=n=>n.toLocaleString('id-ID');
 const E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
@@ -155,7 +159,7 @@ if(!l.length)box.append(E('p','mu','Belum ada proyek. Ketuk "Proyek Baru" untuk 
 for(const p of l){const r=E('div','card row'),th=E('div','th',p.t[0].toUpperCase()),b=E('div','grow');th.style.background=grad(p.t);b.append(E('b','',p.t),E('div','mu',p.n+' bab'),E('div','mu','Diubah '+ago(p.u)));
 const m=E('button','ib','⋮');m.onclick=e=>{e.stopPropagation();pmenu(p)};r.append(th,b,m);r.onclick=()=>openP(p);box.append(r)}}
 function pmenu(p){sheet(p.t,[['Ubah nama',async()=>{const n=await ask('Nama proyek',p.t);if(n&&n.trim()){p.t=n.trim();await put('projects',p);renderLib()}}],['Novel Notes',()=>openNN(p,'lib')],['Ekspor...',()=>exportMenu(p)],['Hapus proyek',()=>delP(p),1]])}
-async function delP(p){if(!await yes(`Hapus "${p.t}" beserta semua babnya? Tindakan ini tidak bisa dibatalkan.`))return;const ids=(await chapsOf(p.id)).map(c=>c.id);await tx(['projects','chapters','texts'],'readwrite',(a,b,c)=>{a.delete(p.id);ids.forEach(i=>{b.delete(i);c.delete(i)});c.delete('n_'+p.id);c.delete('nn_'+p.id)});if(P&&P.id==p.id){P=C=null}renderLib()}
+async function delP(p){if(!await yes(`Hapus "${p.t}" beserta semua babnya? Tindakan ini tidak bisa dibatalkan.`))return;const ids=(await chapsOf(p.id)).map(c=>c.id);await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{a.delete(p.id);ids.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});c.delete('n_'+p.id);c.delete('nn_'+p.id)});if(P&&P.id==p.id){P=C=null}renderLib()}
 async function newP(){const t=await ask('Judul proyek baru');if(!t||!t.trim())return;const p={id:uid(),t:t.trim(),u:Date.now(),n:0};await put('projects',p);openP(p)}
 async function openP(p){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');C=null;P=p;chs=await chapsOf(p.id);if(!chs.length)await addCh();openC(chs.find(c=>c.id==p.last)||chs[0])}
 
@@ -167,7 +171,7 @@ async function openC(c){await flush();if(dirty)return toast('Tulisan belum tersi
 let sv=Promise.resolve(),fails=0;
 const save=()=>sv=sv.then(doSave);
 async function doSave(){if(!dirty||!C)return;dirty=false;const cur=C,pj=P,x=$('#ta').value;cur.t=$('#ct').value.trim()||'Tanpa judul';cur.w=stats(x)[0];pj.u=Date.now();const c={...cur},p={...pj};
-try{let sn=0;await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);b.get(c.id).onsuccess=e=>{const o=e.target.result;if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();v.put({id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]});a.put({...c,sn});v.index('cid').getAllKeys(c.id).onsuccess=k=>k.target.result.slice(0,-10).forEach(i=>v.delete(i))}b.put({id:c.id,text:x})}});
+try{let sn=0;await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);b.get(c.id).onsuccess=e=>{const o=e.target.result;if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();v.put({id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]});a.put({...c,sn});prune(v,c.id)}b.put({id:c.id,text:x})}});
 if(sn)cur.sn=sn;fails=0;if(C===cur){hdr();if(!dirty)setSt(true)}}
 catch(e){dirty=true;fails++;if(C===cur)setSt(false,'● Gagal menyimpan, mencoba lagi...');if(fails==3)toast('Penyimpanan bermasalah. Ekspor ZIP untuk mengamankan tulisanmu.');clearTimeout(timer);timer=setTimeout(save,Math.min(3e4,2e3*2**fails))}}
 function flush(){if(dirty){clearTimeout(timer);save()}return sv}
@@ -182,7 +186,7 @@ chs.forEach((c,i)=>{if(!c.t.toLowerCase().includes(q))return;const r=E('div','ro
 if(reord){const u=E('button','ib','↑'),d=E('button','ib','↓');u.onclick=()=>mv(i,-1);d.onclick=()=>mv(i,1);r.append(u,d)}
 else{const m=E('button','ib','⋮');m.onclick=e=>{e.stopPropagation();cmenu(c)};r.append(m);r.onclick=()=>openC(c)}box.append(r)})}
 async function mv(i,d){const j=i+d;if(j<0||j>=chs.length)return;[chs[i],chs[j]]=[chs[j],chs[i]];chs.forEach((c,k)=>c.o=k);const a=chs.map(c=>({...c}));await tx('chapters','readwrite',s=>{a.forEach(c=>{s.put(c)})});renderCh()}
-function cmenu(c){sheet(c.t,[['Ubah nama',async()=>{const n=await ask('Judul bab',c.t);if(n&&n.trim()){c.t=n.trim();await put('chapters',{...c});if(C&&C.id==c.id)$('#ct').value=c.t;renderCh()}}],['Ekspor bab (.txt)',()=>expoCh(c)],['Hapus bab',async()=>{if(!await yes(`Hapus "${c.t}"?`))return;chs=chs.filter(x=>x!=c);P.n=chs.length;await tx(['chapters','texts','projects'],'readwrite',(a,b,p)=>{a.delete(c.id);b.delete(c.id);p.put({...P})});if(C&&C.id==c.id){C=null;dirty=false}renderCh()},1]])}
+function cmenu(c){sheet(c.t,[['Ubah nama',async()=>{const n=await ask('Judul bab',c.t);if(n&&n.trim()){c.t=n.trim();await put('chapters',{...c});if(C&&C.id==c.id)$('#ct').value=c.t;renderCh()}}],['Ekspor bab (.txt)',()=>expoCh(c)],['Hapus bab',async()=>{if(!await yes(`Hapus "${c.t}"?`))return;chs=chs.filter(x=>x!=c);P.n=chs.length;await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,p,v)=>{a.delete(c.id);b.delete(c.id);p.put({...P});dv(v,c.id)});if(C&&C.id==c.id){C=null;dirty=false}renderCh()},1]])}
 
 /* ===== Berkas & Cadangan ===== */
 async function renderFiles(){const l=(await tx('projects','readonly',s=>s.getAll())).sort((a,b)=>b.u-a.u),box=$('#flist');box.replaceChildren();
@@ -232,11 +236,19 @@ a.onclick=async()=>expo(await tx('projects','readonly',s=>s.getAll()));n.onclick
 rm.replaceChildren(E('b','',lb?`Terakhir backup ${Math.floor(d)} hari lalu`:'Belum pernah backup'),E('div','mu','Ekspor ZIP supaya tulisanmu aman dari penghapusan data browser.'),r);rm.style.display='block'}
 
 /* ===== Riwayat versi ===== */
-const snap=x=>put('versions',{id:uid(),cid:C.id,t:Date.now(),text:x,w:stats(x)[0]});
+/* ===== Batas riwayat versi: maksimal 5 per bab ===== */
+const MAXV=5,prune=(v,cid)=>{v.index('cid').getAll(cid).onsuccess=e=>e.target.result.sort((a,b)=>b.t-a.t).slice(MAXV).forEach(r=>v.delete(r.id))},
+dv=(v,cid)=>{v.index('cid').getAllKeys(cid).onsuccess=e=>e.target.result.forEach(k=>v.delete(k))};
+async function migV(){if(await tx('settings','readonly',s=>s.get('vp5')))return;
+const[vs,cs]=await Promise.all([tx('versions','readonly',s=>s.getAll()),tx('chapters','readonly',s=>s.getAllKeys())]),ok=new Set(cs),g={},del=[];
+vs.forEach(r=>{(g[r.cid]=g[r.cid]||[]).push(r)});
+for(const k in g){const l=g[k].sort((a,b)=>b.t-a.t);(ok.has(k)?l.slice(MAXV):l).forEach(r=>del.push(r.id))}
+if(del.length)await tx('versions','readwrite',v=>{del.forEach(i=>v.delete(i))});await put('settings',{k:'vp5',v:1})}
+const snap=x=>tx('versions','readwrite',v=>{v.put({id:uid(),cid:C.id,t:Date.now(),text:x,w:stats(x)[0]});prune(v,C.id)});
 async function snapNow(){await flush();const x=$('#ta').value;if(!x.trim())return toast('Bab masih kosong');await snap(x);C.sn=Date.now();put('chapters',{...C});toast('Versi disimpan')}
 const dt=t=>new Date(t).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-async function hist(){if(!C)return;await flush();const l=(await tx('versions','readonly',s=>s.index('cid').getAll(C.id))).sort((a,b)=>b.t-a.t);
-sheet('Riwayat versi',[['Simpan versi sekarang',snapNow],...l.map(v=>[`${dt(v.t)} • ${fmt(v.w)} kata`,()=>restore(v)])])}
+async function hist(){if(!C)return;await flush();await tx('versions','readwrite',v=>{prune(v,C.id)});const l=(await tx('versions','readonly',s=>s.index('cid').getAll(C.id))).sort((a,b)=>b.t-a.t);
+sheet('Riwayat versi (maks. 5)',[['Simpan versi sekarang',snapNow],...l.map(v=>[`${dt(v.t)} • ${fmt(v.w)} kata`,()=>restore(v)])])}
 async function restore(v){if(!await yes(`Kembalikan ke versi ${dt(v.t)}? Versi saat ini disimpan dulu.`,'Kembalikan'))return;await snap($('#ta').value);$('#ta').value=v.text;touch();await save();count();toast('Versi dikembalikan')}
 
 /* ===== Cari & ganti ===== */
@@ -249,7 +261,7 @@ out.textContent=`${fmt(tot)} hasil di ${hit.length} bab:\n`+hit.map(h=>`• ${ch
 if(!rep)return;const r=$('#fp').value;
 if(!await yes(`Ganti ${fmt(tot)} kemunculan di ${hit.length} bab? Versi lama tiap bab disimpan di riwayat.`,'Ganti'))return;
 const nt=hit.map(h=>h[2].replace(re,()=>r));
-await tx(['texts','chapters','versions'],'readwrite',(t,a,v)=>{hit.forEach((h,k)=>{const c=chs[h[0]];c.w=stats(nt[k])[0];v.put({id:uid()+k,cid:c.id,t:Date.now(),text:h[2],w:stats(h[2])[0]});t.put({id:c.id,text:nt[k]});a.put({...c})})});
+await tx(['texts','chapters','versions'],'readwrite',(t,a,v)=>{hit.forEach((h,k)=>{const c=chs[h[0]];c.w=stats(nt[k])[0];v.put({id:uid()+k,cid:c.id,t:Date.now(),text:h[2],w:stats(h[2])[0]});prune(v,c.id);t.put({id:c.id,text:nt[k]});a.put({...c})})});
 hit.forEach((h,k)=>{if(C&&chs[h[0]].id==C.id){$('#ta').value=nt[k];count()}});
 out.textContent=`Selesai: ${fmt(tot)} diganti di ${hit.length} bab.`;renderCh()}
 
@@ -312,6 +324,6 @@ toast('Memuat versi terbaru...');setTimeout(()=>location.reload(),300)}
 $('#up').onclick=upd;$('#np').onclick=newP;$('#ea').onclick=async()=>expo(await tx('projects','readonly',s=>s.getAll()));$('#ia').onclick=()=>$('#imp').click();
 $$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
 
-(async()=>{db=await open();const s=await tx('settings','readonly',x=>x.get('cfg'));if(s)cfg={...DEF,...s.v};lockWin();applyCfg();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();show('lib');
+(async()=>{db=await open();const s=await tx('settings','readonly',x=>x.get('cfg'));if(s)cfg={...DEF,...s.v};lockWin();migV().catch(()=>{});applyCfg();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();show('lib');
 if('serviceWorker' in navigator){const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had)flush().then(()=>location.reload())})}})();
 </script></body></html>

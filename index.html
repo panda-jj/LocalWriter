@@ -5,11 +5,13 @@
 <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <title>LocalWriter</title>
 <style>
-@font-face{font-family:LWLato;font-weight:400;font-style:normal;font-display:swap;src:url(lato-400.woff2) format("woff2")}
-@font-face{font-family:LWLato;font-weight:700;font-style:normal;font-display:swap;src:url(lato-700.woff2) format("woff2")}
-@font-face{font-family:LWTinos;font-weight:400;font-style:normal;font-display:swap;src:url(tinos-400.woff2) format("woff2")}
-@font-face{font-family:LWTinos;font-weight:700;font-style:normal;font-display:swap;src:url(tinos-700.woff2) format("woff2")}
-:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#6b7385;--ac:#3f5f8f;--ln:#e3e6ee;--sel:#dfe8fb;--ok:#2e8b57;--no:#c0702a;--fs:18px;--lh:1.6;--ff:Georgia,serif}
+@font-face{font-family:LWMerri;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/merriweather-400.woff2) format("woff2")}
+@font-face{font-family:LWMerri;font-weight:700;font-style:normal;font-display:swap;src:url(fonts/merriweather-700.woff2) format("woff2")}
+@font-face{font-family:LWLato;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/lato-400.woff2) format("woff2")}
+@font-face{font-family:LWLato;font-weight:700;font-style:normal;font-display:swap;src:url(fonts/lato-700.woff2) format("woff2")}
+@font-face{font-family:LWTinos;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/tinos-400.woff2) format("woff2")}
+@font-face{font-family:LWTinos;font-weight:700;font-style:normal;font-display:swap;src:url(fonts/tinos-700.woff2) format("woff2")}
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#6b7385;--ac:#3f5f8f;--ln:#e3e6ee;--sel:#dfe8fb;--ok:#2e8b57;--no:#c0702a;--fs:18px;--lh:1.6;--ff:LWMerri,serif}
 [data-t=dark]{--bg:#12151c;--card:#1b2029;--tx:#e6e9f0;--mu:#8e97aa;--ac:#6f93cf;--ln:#2a313e;--sel:#26344d;--ok:#5cc08a;--no:#e0a060}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
@@ -28,7 +30,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 .btn.sm{width:auto;margin:0;padding:8px 12px;font-size:13px}
 .in{width:100%;border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:12px;padding:11px 14px;font-size:15px}
 .card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:10px;margin-bottom:10px}
-.th{width:64px;height:64px;border-radius:10px;flex:none;color:#ffffffcc;display:grid;place-items:center;font:700 26px Georgia,serif}
+.th{width:64px;height:64px;border-radius:10px;flex:none;color:#ffffffcc;display:grid;place-items:center;font:700 26px LWMerri,serif}
 #nav{display:none;background:var(--card);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}
 #nav button{flex:1;background:0;border:0;color:var(--mu);padding:11px 0;font-size:13px}
 #nav button.a{color:var(--ac);font-weight:700}
@@ -65,7 +67,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="pad"><div class="mu cap">Penyimpanan lokal</div><div id="flist"></div><div class="mu cap">Cadangan</div>
 <button class="btn" id="ea"><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></button>
 <button class="btn" id="ia"><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></button>
-<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn" id="up"><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></button><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v12</p></div></section>
+<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn" id="up"><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></button><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v14</p></div></section>
 
 <section class="scr" id="chap"><div class="hd"><button class="ib" id="cb">←</button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs">⌕</button><button class="ib" id="ca">＋</button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari &amp; Ganti</button><button class="btn" id="cnn">Novel Notes</button><button class="btn" id="cn2">Catatan Bebas</button></div></section>
@@ -92,7 +94,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="ov" id="nt"><div class="sh"><div class="row"><b class="grow">Catatan Bebas</b><button class="ib" id="nx">✕</button></div><div class="mu">Tokoh, dunia cerita, alur. Tidak masuk hitungan bab.</div>
 <textarea id="nta" class="in" style="height:50dvh;margin-top:10px;font:15px/1.5 system-ui,sans-serif;resize:none"></textarea></div></div>
 <div class="ov" id="set"><div class="sh"><div class="row"><b class="grow">Pengaturan Teks</b><button class="ib" id="sx">✕</button></div>
-<label>Jenis Huruf<select id="sf"><option value="serif">Georgia (serif)</option><option value="book">Palatino</option><option value="sans">Sans-serif</option><option value="mono">Monospace</option><option value="tnr">Times New Roman</option><option value="lato">Lato</option></select></label>
+<label>Jenis Huruf<select id="sf"><option value="serif">Merriweather</option><option value="tinos">Tinos (serif)</option><option value="lato">Lato</option><option value="sans">Sans-serif</option><option value="mono">Monospace</option></select></label>
 <label>Ukuran Huruf<select id="ss"></select></label>
 <label>Jarak Baris: <span id="slv"></span><input type="range" id="sl" min="1.2" max="2.2" step=".1"></label>
 <div class="l">Perataan Teks</div><div class="seg"><button data-a="left">Kiri</button><button data-a="center">Tengah</button><button data-a="right">Kanan</button><button data-a="justify">Rata</button></div>
@@ -100,7 +102,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 <div class="row" style="margin-top:16px"><button class="btn" id="sr">Atur Ulang</button><button class="btn pri" id="sd">Selesai</button></div></div></div>
 
 <script>
-const FF={tnr:'"Times New Roman",LWTinos,Times,serif',lato:'LWLato,system-ui,sans-serif',serif:'Georgia,"Times New Roman",serif',book:'Palatino,"Palatino Linotype","Book Antiqua",serif',sans:'system-ui,-apple-system,sans-serif',mono:'ui-monospace,Menlo,Consolas,monospace'};
+const FF={serif:'LWMerri,serif',tinos:'LWTinos,serif',lato:'LWLato,system-ui,sans-serif',sans:'system-ui,-apple-system,sans-serif',mono:'ui-monospace,Menlo,Consolas,monospace'},FM={book:'serif',tnr:'tinos'};
 const DEF={ff:'serif',fs:18,lh:1.6,al:'left',th:'system'};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6),fmt=n=>n.toLocaleString('id-ID');
 const E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
@@ -207,7 +209,7 @@ await tx(['projects','chapters','texts'],'readwrite',(a,b,c)=>{a.put(p);if(nn)c.
 toast(n?n+' proyek diimpor':'Tidak ada file .txt di ZIP');renderFiles()}catch(err){toast('File ZIP tidak valid')}};
 
 /* ===== Pengaturan teks ===== */
-function applyCfg(){const r=document.documentElement;r.style.setProperty('--ff',FF[cfg.ff]);r.style.setProperty('--fs',cfg.fs+'px');r.style.setProperty('--lh',cfg.lh);$('#ta').style.textAlign=cfg.al;
+function applyCfg(){if(FM[cfg.ff])cfg.ff=FM[cfg.ff];const r=document.documentElement;r.style.setProperty('--ff',FF[cfg.ff]);r.style.setProperty('--fs',cfg.fs+'px');r.style.setProperty('--lh',cfg.lh);$('#ta').style.textAlign=cfg.al;
 r.dataset.t=cfg.th=='system'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):cfg.th;
 $('#sf').value=cfg.ff;$('#ss').value=cfg.fs;$('#sl').value=cfg.lh;$('#slv').textContent=cfg.lh;
 $$('[data-a]').forEach(b=>b.classList.toggle('a',b.dataset.a==cfg.al));$$('[data-th]').forEach(b=>b.classList.toggle('a',b.dataset.th==cfg.th))}

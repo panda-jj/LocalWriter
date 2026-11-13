@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
-<meta name="theme-color" content="#3f5f8f">
+<meta name="theme-color" content="#1d6b87">
 <link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <title>LocalWriter</title>
 <style>
@@ -63,50 +63,114 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 #ed.wf #ta{display:none}#ed.wf #wlay{display:block}
 #wlay mark{background:#f5d76e;color:#1d2433;border-radius:2px}#wlay mark.cur{background:var(--ac);color:#fff}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:20}
+/* ===== Tema Deep Blue Ocean (hanya tampilan) ===== */
+:root{--bg:#f2f8fa;--card:#fff;--tx:#0e2a38;--mu:#5d7a89;--ac:#1d6b87;--ln:#dbe9ee;--sel:#e2f1f6;--shd:0 1px 2px rgba(10,60,80,.05),0 8px 22px rgba(10,60,80,.08);--r:16px}
+[data-t=dark]{--bg:#09181f;--card:#10242e;--tx:#e4f1f6;--mu:#86a6b5;--ac:#4fb3d0;--ln:#1c3844;--sel:#16384a;--shd:0 1px 2px rgba(0,0,0,.35),0 8px 22px rgba(0,0,0,.4)}
+body{font:15px/1.45 LWLato,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;pointer-events:none}
+h1{font:700 25px/1.25 LWMerri,serif;letter-spacing:-.01em}
+.mu{color:var(--mu)}
+.hd{background:transparent;border:0;padding:calc(env(safe-area-inset-top) + 12px) 14px 8px 16px}
+#lib .hd,#files .hd{align-items:flex-start}
+#ed .hd,#chap .hd,#nn .hd{background:var(--card);border-bottom:1px solid var(--ln);align-items:center}
+#chap h1,#nn b{letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:8px;color:var(--ac);font-weight:700;font-size:15px;margin-bottom:12px}.brand .i{width:26px;height:26px}
+.pad{padding:8px 16px 24px}
+.ib{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;font-size:15px;color:var(--tx)}
+.ib.pill{width:auto;height:34px;padding:0 14px;font-size:13px;font-weight:650;background:var(--sel);color:var(--ac);border-radius:20px}
+.in{border:1px solid var(--ln);border-radius:14px;padding:12px 14px;background:var(--card);box-shadow:var(--shd)}
+.in:focus{outline:2px solid var(--ac);outline-offset:-1px}
+#q{padding-left:42px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b94a8' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:13px center;background-size:20px}
+.cap,.sec{font-size:12px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}
+.card{border:0;border-radius:var(--r);box-shadow:var(--shd);padding:12px}
+.th{width:68px;height:68px;border-radius:13px}
+.btn{border:0;border-radius:14px;padding:14px;font-weight:600;box-shadow:var(--shd)}
+.btn.pri{background:var(--ac);color:#fff;box-shadow:0 8px 20px rgba(29,107,135,.34)}.btn.dn{color:#d1453b}
+.btn.sm{padding:8px 14px;font-size:13px;border-radius:12px}
+#np{position:sticky;bottom:12px;margin-top:16px}
+.btn.act{display:flex;align-items:center;gap:14px;text-align:left}.act .ico{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:var(--sel);color:var(--ac);flex:none}
+.act b{display:block}
+#nav{background:var(--card);border-top:1px solid var(--ln);padding:6px 8px calc(env(safe-area-inset-bottom) + 6px);gap:4px}
+#nav button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 5px;font-size:11.5px;font-weight:650;position:relative;border-radius:14px}
+#nav button.a{color:var(--ac)}#nav button.a::after{content:'';position:absolute;bottom:-4px;width:30px;height:3px;border-radius:3px;background:var(--ac)}
+.crow{border:0;border-radius:14px;margin-bottom:4px}.crow.cur{background:var(--sel)}.crow.cur b{color:var(--ac)}
+#ro,#cf{background:transparent;box-shadow:none;border:1.5px dashed var(--ln);color:var(--mu)}
+#ed{background:var(--card)}
+#ct{font-size:28px;letter-spacing:-.01em}
+.ft{background:var(--bg);border-top:1px solid var(--ln)}
+.tb{background:var(--card);border-top:1px solid var(--ln);padding:4px 6px calc(env(safe-area-inset-bottom) + 4px)}
+.tb button{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:var(--mu);font-size:15px;font-weight:700}.tb button.a{background:var(--sel);color:var(--ac)}
+.tb .sp{width:1px;height:22px;background:var(--ln)}
+#wbar{background:var(--card)}
+.av{width:48px;height:48px;border:0;box-shadow:var(--shd);font-weight:650}.av.on{background:var(--ac);color:#fff}
+#ndet{border:0;box-shadow:var(--shd);border-radius:14px}
+.ov{background:rgba(10,15,25,.45)}
+.sh{border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.18)}
+.sh::before{content:'';display:block;width:40px;height:4px;border-radius:4px;background:var(--ln);margin:-6px auto 14px}
+.seg{gap:8px}.seg button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;font-size:12px;font-weight:600}.seg button.a{background:var(--sel);border-color:var(--ac);color:var(--ac)}
+.sh select{border-radius:12px}
+.toast{background:rgba(24,30,44,.94);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25);font-weight:550}
+.scr.on{animation:fi .18s ease}@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.scr.on{animation:none}}
+#lib .hd{padding-bottom:4px}
+#chap .hd{background:linear-gradient(135deg,#0f4c64,#1d6b87);border:0;color:#fff}#chap .hd .ib{color:#fff}#chap .hd .ib:active{background:rgba(255,255,255,.16)}#chap h1{color:#fff}
+.fico{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:var(--sel);color:var(--ac);flex:none}
+#flist .card{display:flex;align-items:center;gap:12px}
+#lb{position:relative;margin:0 0 14px;padding:20px 16px 20px 70px;border-radius:16px;background:linear-gradient(135deg,var(--sel),var(--card));box-shadow:var(--shd);font:700 16px/1.3 LWMerri,serif;color:var(--tx)}
+#lb::before{content:'';position:absolute;left:18px;top:50%;width:34px;height:34px;margin-top:-17px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d6b87' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z'/%3E%3C/svg%3E") center/contain no-repeat}
+#backup #ea{background:var(--ac);color:#fff}#backup #ea .mu{color:rgba(255,255,255,.78)}#backup #ea .ico{background:rgba(255,255,255,.18);color:#fff}
+.info{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--sel);margin-top:12px}.info p{margin:0 0 4px;font-size:13px}.info p:last-child{margin:0}.info .i{color:var(--ac);margin-top:1px}
+.ver{text-align:center;font-size:12px;margin-top:18px}
+/* Perbaikan: tombol keluar-fokus hanya tampil di Mode Fokus */
+#ed:not(.focus) .fx{display:none!important}#ed.focus .fx{display:grid}
 </style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="19" r="1.3"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol><symbol id="i-focus" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6M3.5 13A9 9 0 1 0 6 6.7L3 10"/></symbol><symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6M20.5 13A9 9 0 1 1 18 6.7L21 10"/></symbol><symbol id="i-al" viewBox="0 0 24 24"><path d="M17 10H3M21 6H3M21 14H3M17 18H3"/></symbol><symbol id="i-ac" viewBox="0 0 24 24"><path d="M18 10H6M21 6H3M21 14H3M18 18H6"/></symbol><symbol id="i-ar" viewBox="0 0 24 24"><path d="M21 10H7M21 6H3M21 14H3M21 18H7"/></symbol><symbol id="i-aj" viewBox="0 0 24 24"><path d="M21 10H3M21 6H3M21 14H3M21 18H3"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol><symbol id="i-lib" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-feather" viewBox="0 0 24 24"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.5V19h8.5zM16 8 2 22M17.5 15H9"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></symbol></svg>
 <div id="app">
-<section class="scr" id="lib"><div class="hd"><div class="grow"><h1>Pustaka Anda</h1><div class="mu">Kelola proyek tulisan Anda</div></div><button class="ib" id="gs">⚙</button></div>
-<div class="pad"><div class="card" id="rm" style="display:none"></div><input id="q" class="in" placeholder="Cari novel..." oninput="renderLib()"><div class="mu cap">Terbaru</div><div id="plist"></div><button class="btn pri" id="np">+ Proyek Baru</button></div></section>
+<section class="scr" id="lib"><div class="hd"><div class="grow"><div class="brand"><svg class="i"><use href="#i-feather"/></svg> LocalWriter</div><h1>Halo, Penulis</h1><div class="mu">Cerita hebat selalu dimulai dari satu kata.</div></div><button class="ib" id="gs" aria-label="Pengaturan teks"><svg class="i"><use href="#i-sliders"/></svg></button></div>
+<div class="pad"><div class="card" id="rm" style="display:none"></div><input id="q" class="in" placeholder="Cari novel..." oninput="renderLib()"><div class="mu cap">Novel Saya</div><div id="plist"></div><button class="btn pri" id="np">+ Proyek Baru</button></div></section>
 
-<section class="scr" id="files"><div class="hd"><div class="grow"><h1>Berkas &amp; Cadangan</h1><div class="mu">Kelola berkas dan buat cadangan</div></div></div>
-<div class="pad"><div class="mu cap">Penyimpanan lokal</div><div id="flist"></div><div class="mu cap">Cadangan</div>
-<button class="btn" id="ea"><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></button>
-<button class="btn" id="ia"><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></button>
-<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn" id="up"><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></button><p class="mu" id="use"></p><p class="mu" id="pst"></p><p class="mu" id="lb"></p><p class="mu">LocalWriter v16</p></div></section>
+<section class="scr" id="files"><div class="hd"><div class="grow"><h1>Berkas Saya</h1><div class="mu">Semua novel di perangkat ini</div></div></div>
+<div class="pad"><div id="flist"></div></div></section>
+<section class="scr" id="backup"><div class="hd"><div class="grow"><h1>Cadangan</h1><div class="mu">Amankan tulisanmu dengan salinan ZIP</div></div></div>
+<div class="pad"><p id="lb"></p>
+<button class="btn act" id="ea"><span class="ico"><svg class="i"><use href="#i-upload"/></svg></span><span><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></span></button>
+<button class="btn act" id="ia"><span class="ico"><svg class="i"><use href="#i-download"/></svg></span><span><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></span></button>
+<input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn act" id="up"><span class="ico"><svg class="i"><use href="#i-refresh"/></svg></span><span><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></span></button>
+<div class="info"><svg class="i"><use href="#i-shield"/></svg><div><p id="use"></p><p id="pst"></p></div></div><p class="mu ver">LocalWriter v20</p></div></section>
 
-<section class="scr" id="chap"><div class="hd"><button class="ib" id="cb">←</button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs">⌕</button><button class="ib" id="ca">＋</button></div>
+<section class="scr" id="chap"><div class="hd"><button class="ib" id="cb" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs" aria-label="Cari bab"><svg class="i"><use href="#i-search"/></svg></button><button class="ib" id="ca" aria-label="Bab baru"><svg class="i"><use href="#i-plus"/></svg></button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari di Semua Bab</button><button class="btn" id="cnn">Novel Notes</button></div></section>
 
-<section class="scr" id="ed"><div class="hd"><button class="ib" id="eb">←</button><div class="grow" id="hd"><b id="h1"></b><div class="mu" id="h2"></div></div><button class="ib" id="wfind">⌕</button><button class="ib" id="nne" style="font-size:13px;width:auto;padding:0 8px">Notes</button><button class="ib" id="fb">⛶</button></div>
-<div id="wbar"><div class="row"><input id="wq" class="in grow" placeholder="Cari di bab ini..."><button class="ib" id="wprev">▲</button><button class="ib" id="wnext">▼</button><button class="ib" id="wx">✕</button></div>
+<section class="scr" id="ed"><div class="hd"><button class="ib" id="eb" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button><div class="grow" id="hd"><b id="h1"></b><div class="mu" id="h2"></div></div><button class="ib" id="wfind" aria-label="Cari di bab ini"><svg class="i"><use href="#i-search"/></svg></button><button class="ib pill" id="nne">Notes</button><button class="ib" id="fb" aria-label="Mode fokus"><svg class="i"><use href="#i-focus"/></svg></button></div>
+<div id="wbar"><div class="row"><input id="wq" class="in grow" placeholder="Cari di bab ini..."><button class="ib" id="wprev" aria-label="Sebelumnya"><svg class="i"><use href="#i-up"/></svg></button><button class="ib" id="wnext" aria-label="Berikutnya"><svg class="i"><use href="#i-down"/></svg></button><button class="ib" id="wx" aria-label="Tutup"><svg class="i"><use href="#i-x"/></svg></button></div>
 <div class="row"><input id="wp" class="in grow" placeholder="Ganti dengan..."><button class="btn sm" id="wrep">Ganti</button><button class="btn sm" id="wall">Semua</button></div>
 <div class="row mu"><label><input type="checkbox" id="wcs"> Huruf besar/kecil sama</label><span class="grow"></span><span id="wcnt"></span><button class="btn sm" id="wun">Urungkan</button></div></div>
-<button class="ib fx" id="xf">✕</button>
+<button class="ib fx" id="xf" aria-label="Keluar mode fokus"><svg class="i"><use href="#i-x"/></svg></button>
 <input id="ct" maxlength="120" placeholder="Judul bab" autocomplete="off">
 <textarea id="ta" placeholder="Mulai menulis..."></textarea><div id="wlay"></div>
 <div class="ft"><span id="cn"></span><span id="st"></span></div>
-<div class="tb"><button id="un">↶</button><button id="re">↷</button><button data-a="left">⬱</button><button data-a="center">≡</button><button data-a="right">⬳</button><button data-a="justify">☰</button><button id="hi">◷</button><button id="aa">Aa</button></div></section>
-<section class="scr" id="nn"><div class="hd"><button class="ib" id="nnb">←</button><div class="grow"><b>Novel Notes</b><div class="mu" id="nph"></div></div></div>
-<div class="pad"><div class="sec"><span class="grow">Karakter</span><button class="ib" id="nac">＋</button></div><div id="nchars"></div>
-<div id="ndet"><b class="grow" id="ndt"></b><button class="ib" id="nde">✎</button><button class="ib" id="ndd">🗑</button></div>
-<div class="sec"><span class="grow">Dunia &amp; Lokasi</span><button class="ib" id="naw">＋</button></div><div id="nworld"></div><div class="sec"><span class="grow">Catatan</span><button class="ib" id="nned">✎</button></div><div id="nnote" class="wr"></div></div></section>
+<div class="tb"><button id="un" aria-label="Urungkan"><svg class="i"><use href="#i-undo"/></svg></button><button id="re" aria-label="Ulangi"><svg class="i"><use href="#i-redo"/></svg></button><i class="sp"></i><button data-a="left" aria-label="Rata kiri"><svg class="i"><use href="#i-al"/></svg></button><button data-a="center" aria-label="Tengah"><svg class="i"><use href="#i-ac"/></svg></button><button data-a="right" aria-label="Rata kanan"><svg class="i"><use href="#i-ar"/></svg></button><button data-a="justify" aria-label="Rata kiri-kanan"><svg class="i"><use href="#i-aj"/></svg></button><i class="sp"></i><button id="hi" aria-label="Riwayat versi"><svg class="i"><use href="#i-clock"/></svg></button><button id="aa" aria-label="Pengaturan teks">Aa</button></div></section>
+<section class="scr" id="nn"><div class="hd"><button class="ib" id="nnb" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button><div class="grow"><b>Novel Notes</b><div class="mu" id="nph"></div></div></div>
+<div class="pad"><div class="sec"><span class="grow">Karakter</span><button class="ib" id="nac" aria-label="Tambah karakter"><svg class="i"><use href="#i-plus"/></svg></button></div><div id="nchars"></div>
+<div id="ndet"><b class="grow" id="ndt"></b><button class="ib" id="nde" aria-label="Ubah karakter"><svg class="i"><use href="#i-edit"/></svg></button><button class="ib" id="ndd" aria-label="Hapus karakter"><svg class="i"><use href="#i-trash"/></svg></button></div>
+<div class="sec"><span class="grow">Dunia &amp; Lokasi</span><button class="ib" id="naw" aria-label="Tambah catatan dunia"><svg class="i"><use href="#i-plus"/></svg></button></div><div id="nworld"></div><div class="sec"><span class="grow">Catatan</span><button class="ib" id="nned" aria-label="Ubah catatan"><svg class="i"><use href="#i-edit"/></svg></button></div><div id="nnote" class="wr"></div></div></section>
 </div>
-<div id="nav"><button data-s="lib">Pustaka</button><button data-s="files">Berkas &amp; Cadangan</button></div>
+<div id="nav"><button data-s="lib"><svg class="i"><use href="#i-lib"/></svg><span>Pustaka</span></button><button data-s="files"><svg class="i"><use href="#i-folder"/></svg><span>Berkas</span></button><button data-s="backup"><svg class="i"><use href="#i-cloud"/></svg><span>Cadangan</span></button></div>
 
 <div class="ov" id="dw"><div class="sh"><b>LocalWriter terbuka di jendela lain</b><p class="mu">Menulis di dua jendela sekaligus bisa saling menimpa tulisan. Tutup jendela yang lain, lalu ketuk "Coba lagi".</p><div class="row"><button class="btn" id="dr">Lanjut (berisiko)</button><button class="btn pri" id="dc">Coba lagi</button></div></div></div>
-<div class="ov" id="fr"><div class="sh"><div class="row"><b class="grow">Cari di Semua Bab</b><button class="ib" id="fx2">✕</button></div>
+<div class="ov" id="fr"><div class="sh"><div class="row"><b class="grow">Cari di Semua Bab</b><button class="ib" id="fx2" aria-label="Tutup"><svg class="i"><use href="#i-x"/></svg></button></div>
 <input id="ff" class="in" placeholder="Cari..." style="margin-top:12px"><input id="fp" class="in" placeholder="Ganti dengan..." style="margin-top:8px">
 <label><input type="checkbox" id="fc"> Huruf besar/kecil harus sama</label>
 <div id="frr" class="mu" style="margin:10px 0;max-height:30dvh;overflow:auto;white-space:pre-line"></div>
 <div class="row"><button class="btn" id="fg">Cari</button><button class="btn pri" id="fa">Ganti di Semua Bab</button></div></div></div>
-<div class="ov" id="nt"><div class="sh"><div class="row"><b class="grow">Catatan</b><button class="ib" id="nx">✕</button></div><div class="mu">Catatan teks bebas untuk novel ini. Tidak masuk hitungan bab.</div>
+<div class="ov" id="nt"><div class="sh"><div class="row"><b class="grow">Catatan</b><button class="ib" id="nx" aria-label="Tutup"><svg class="i"><use href="#i-x"/></svg></button></div><div class="mu">Catatan teks bebas untuk novel ini. Tidak masuk hitungan bab.</div>
 <textarea id="nta" class="in" style="height:50dvh;margin-top:10px;font:15px/1.5 system-ui,sans-serif;resize:none"></textarea></div></div>
-<div class="ov" id="set"><div class="sh"><div class="row"><b class="grow">Pengaturan Teks</b><button class="ib" id="sx">✕</button></div>
+<div class="ov" id="set"><div class="sh"><div class="row"><b class="grow">Pengaturan Teks</b><button class="ib" id="sx" aria-label="Tutup"><svg class="i"><use href="#i-x"/></svg></button></div>
 <label>Jenis Huruf<select id="sf"><option value="serif">Merriweather</option><option value="tinos">Tinos (serif)</option><option value="lato">Lato</option><option value="sans">Sans-serif</option><option value="mono">Monospace</option></select></label>
 <label>Ukuran Huruf<select id="ss"></select></label>
 <label>Jarak Baris: <span id="slv"></span><input type="range" id="sl" min="1.2" max="2.2" step=".1"></label>
-<div class="l">Perataan Teks</div><div class="seg"><button data-a="left">Kiri</button><button data-a="center">Tengah</button><button data-a="right">Kanan</button><button data-a="justify">Rata</button></div>
-<div class="l">Tema</div><div class="seg"><button data-th="light">Terang</button><button data-th="dark">Gelap</button><button data-th="system">Sistem</button></div>
+<div class="l">Perataan Teks</div><div class="seg"><button data-a="left" aria-label="Kiri"><svg class="i"><use href="#i-al"/></svg></button><button data-a="center" aria-label="Tengah"><svg class="i"><use href="#i-ac"/></svg></button><button data-a="right" aria-label="Kanan"><svg class="i"><use href="#i-ar"/></svg></button><button data-a="justify" aria-label="Rata"><svg class="i"><use href="#i-aj"/></svg></button></div>
+<div class="l">Tema</div><div class="seg"><button data-th="light"><svg class="i"><use href="#i-sun"/></svg>Terang</button><button data-th="dark"><svg class="i"><use href="#i-moon"/></svg>Gelap</button><button data-th="system"><svg class="i"><use href="#i-monitor"/></svg>Sistem</button></div>
 <div class="row" style="margin-top:16px"><button class="btn" id="sr">Atur Ulang</button><button class="btn pri" id="sd">Selesai</button></div></div></div>
 
 <script>
@@ -114,6 +178,8 @@ const FF={serif:'LWMerri,serif',tinos:'LWTinos,serif',lato:'LWLato,system-ui,san
 const DEF={ff:'serif',fs:18,lh:1.6,al:'left',th:'system'};
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6),fmt=n=>n.toLocaleString('id-ID');
 const E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const ico=n=>{const N='http://www.w3.org/2000/svg',s=document.createElementNS(N,'svg'),u=document.createElementNS(N,'use');s.setAttribute('class','i');u.setAttribute('href','#i-'+n);s.append(u);return s};
+const Ib=(n,l)=>{const b=E('button','ib');b.append(ico(n));b.setAttribute('aria-label',l||n);return b};
 const safe=s=>s.replace(/[\\/:*?"<>|]/g,'-').trim()||'tanpa-judul',pad=n=>String(n).padStart(2,'0');
 let db,P,C,chs=[],dirty=false,timer,cnt,reord=false,rmHide=false,cfg={...DEF};
 
@@ -159,15 +225,15 @@ function sheet(t,items){const o=E('div','ov'),s=E('div','sh');s.append(E('b','',
 function toast(m){const t=E('div','toast',m);document.body.append(t);setTimeout(()=>t.remove(),2200)}
 function ask(t,v){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),i=E('input','in'),w=E('div','row'),c=E('button','btn','Batal'),k=E('button','btn pri','OK'),end=x=>{o.remove();r(x)};i.value=v||'';i.style.marginTop='12px';c.onclick=()=>end(null);k.onclick=()=>end(i.value);i.onkeydown=e=>{if(e.key=='Enter')end(i.value)};w.append(c,k);s.append(E('b','',t),i,w);o.append(s);document.body.append(o);i.focus();i.select()})}
 function yes(m,l){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),w=E('div','row'),c=E('button','btn','Batal'),k=E('button','btn'+(l?' pri':' dn'),l||'Hapus'),end=x=>{o.remove();r(x)};c.onclick=()=>end(false);k.onclick=()=>end(true);w.append(c,k);const pp=E('p','',m);pp.style.whiteSpace='pre-line';s.append(pp,w);o.append(s);document.body.append(o)})}
-function show(id){if(id!='ed'&&$('#wbar').classList.contains('on'))wClose();if(id!='lib')arm();$$('.scr').forEach(e=>e.classList.toggle('on',e.id==id));$('#nav').style.display=id=='lib'||id=='files'?'flex':'none';$$('#nav button').forEach(b=>b.classList.toggle('a',b.dataset.s==id));if(id=='lib')renderLib();if(id=='files')renderFiles()}
+function show(id){if(id!='ed'&&$('#wbar').classList.contains('on'))wClose();if(id!='lib')arm();$$('.scr').forEach(e=>e.classList.toggle('on',e.id==id));$('#nav').style.display=id=='lib'||id=='files'||id=='backup'?'flex':'none';$$('#nav button').forEach(b=>b.classList.toggle('a',b.dataset.s==id));if(id=='lib')renderLib();if(id=='files'||id=='backup')renderFiles()}
 const ago=t=>{const m=(Date.now()-t)/6e4;return m<1?'baru saja':m<60?Math.floor(m)+' menit lalu':m<1440?Math.floor(m/60)+' jam lalu':Math.floor(m/1440)+' hari lalu'};
-const grad=t=>{const h=Math.abs([...t].reduce((a,c)=>(a*31+c.charCodeAt(0))|0,7))%360;return`linear-gradient(135deg,hsl(${h} 45% 42%),hsl(${(h+50)%360} 50% 24%))`};
+const grad=t=>{const h=185+Math.abs([...t].reduce((a,c)=>(a*31+c.charCodeAt(0))|0,7))%75;return`linear-gradient(135deg,hsl(${h} 52% 38%),hsl(${h+25} 55% 20%))`};
 
 /* ===== Pustaka ===== */
 async function renderLib(){remind();const q=$('#q').value.toLowerCase(),l=(await tx('projects','readonly',s=>s.getAll())).sort((a,b)=>b.u-a.u).filter(p=>p.t.toLowerCase().includes(q)),box=$('#plist');box.replaceChildren();
 if(!l.length)box.append(E('p','mu','Belum ada proyek. Ketuk "Proyek Baru" untuk mulai menulis.'));
 for(const p of l){const r=E('div','card row'),th=E('div','th',p.t[0].toUpperCase()),b=E('div','grow');th.style.background=grad(p.t);b.append(E('b','',p.t),E('div','mu',p.n+' bab'),E('div','mu','Diubah '+ago(p.u)));
-const m=E('button','ib','⋮');m.onclick=e=>{e.stopPropagation();pmenu(p)};r.append(th,b,m);r.onclick=()=>openP(p);box.append(r)}}
+const m=Ib('more','Menu');m.onclick=e=>{e.stopPropagation();pmenu(p)};r.append(th,b,m);r.onclick=()=>openP(p);box.append(r)}}
 function pmenu(p){sheet(p.t,[['Ubah nama',async()=>{const n=await ask('Nama proyek',p.t);if(n&&n.trim()){p.t=n.trim();await put('projects',p);renderLib()}}],['Novel Notes',()=>openNN(p,'lib')],['Ekspor...',()=>exportMenu(p)],['Hapus proyek',()=>delP(p),1]])}
 async function delP(p){if(!await yes(`Hapus "${p.t}" beserta semua babnya? Tindakan ini tidak bisa dibatalkan.`))return;const ids=(await chapsOf(p.id)).map(c=>c.id);await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{a.delete(p.id);ids.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});c.delete('n_'+p.id);c.delete('nn_'+p.id)});if(P&&P.id==p.id){P=C=null}renderLib()}
 async function newP(){const t=await ask('Judul proyek baru');if(!t||!t.trim())return;const p={id:uid(),t:t.trim(),u:Date.now(),n:0};await put('projects',p);openP(p)}
@@ -193,21 +259,21 @@ function touch(){dirty=true;setSt(false);clearTimeout(timer);timer=setTimeout(sa
 /* ===== Bab ===== */
 function renderCh(){const q=$('#cq').value.toLowerCase(),box=$('#clist');box.replaceChildren();$('#ptit').textContent=P.t;$('#pn').textContent=chs.length+' bab';
 chs.forEach((c,i)=>{if(!c.t.toLowerCase().includes(q))return;const r=E('div','row crow'+(C&&C.id==c.id?' cur':'')),b=E('div','grow');b.append(E('b','',`${i+1}. ${c.t}`),E('div','mu',fmt(c.w||0)+' kata'));r.append(b);
-if(reord){const u=E('button','ib','↑'),d=E('button','ib','↓');u.onclick=()=>mv(i,-1);d.onclick=()=>mv(i,1);r.append(u,d)}
-else{const m=E('button','ib','⋮');m.onclick=e=>{e.stopPropagation();cmenu(c)};r.append(m);r.onclick=()=>openC(c)}box.append(r)})}
+if(reord){const u=Ib('up','Naik'),d=Ib('down','Turun');u.onclick=()=>mv(i,-1);d.onclick=()=>mv(i,1);r.append(u,d)}
+else{const m=Ib('more','Menu');m.onclick=e=>{e.stopPropagation();cmenu(c)};r.append(m);r.onclick=()=>openC(c)}box.append(r)})}
 async function mv(i,d){const j=i+d;if(j<0||j>=chs.length)return;[chs[i],chs[j]]=[chs[j],chs[i]];chs.forEach((c,k)=>c.o=k);const a=chs.map(c=>({...c}));await tx('chapters','readwrite',s=>{a.forEach(c=>{s.put(c)})});renderCh()}
 function cmenu(c){sheet(c.t,[['Ubah nama',async()=>{const n=await ask('Judul bab',c.t);if(n&&n.trim()){c.t=n.trim();await put('chapters',{...c});if(C&&C.id==c.id)$('#ct').value=c.t;renderCh()}}],['Ekspor bab (.txt)',()=>expoCh(c)],['Hapus bab',async()=>{if(!await yes(`Hapus "${c.t}"?`))return;chs=chs.filter(x=>x!=c);P.n=chs.length;await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,p,v)=>{a.delete(c.id);b.delete(c.id);p.put({...P});dv(v,c.id)});if(C&&C.id==c.id){C=null;dirty=false}renderCh()},1]])}
 
 /* ===== Berkas & Cadangan ===== */
 async function renderFiles(){const l=(await tx('projects','readonly',s=>s.getAll())).sort((a,b)=>b.u-a.u),box=$('#flist');box.replaceChildren();
-for(const p of l){const r=E('div','card row'),b=E('div','grow'),x=E('button','btn sm','Ekspor');b.append(E('b','',p.t),E('div','mu',p.n+' bab'));x.onclick=e=>{e.stopPropagation();exportMenu(p)};r.append(b,x);r.onclick=()=>openP(p);box.append(r)}
+for(const p of l){const r=E('div','card row'),b=E('div','grow'),x=E('button','btn sm','Ekspor');b.append(E('b','',p.t),E('div','mu',p.n+' bab'));x.onclick=e=>{e.stopPropagation();exportMenu(p)};const fi=E('span','fico');fi.append(ico('folder'));r.append(fi,b,x);r.onclick=()=>openP(p);box.append(r)}
 if(!l.length)box.append(E('p','mu','Belum ada folder proyek.'));
 const ps=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():false;$('#pst').textContent=ps?'Penyimpanan permanen: aktif.':'Penyimpanan permanen: belum aktif, browser masih boleh menghapus data saat memori HP penuh.';const sz=b=>b<1048576?Math.round(b/1024)+' KB':b<1073741824?(b/1048576).toFixed(1)+' MB':(b/1073741824).toFixed(1)+' GB',es=navigator.storage&&navigator.storage.estimate?await navigator.storage.estimate():null;$('#use').textContent=es?`Penyimpanan terpakai (perkiraan): ${sz(es.usage)} dari kuota ${sz(es.quota)}`:'';const lb=await tx('settings','readonly',s=>s.get('lb'));$('#lb').textContent='Cadangan terakhir: '+(lb?new Date(lb.v).toLocaleString('id-ID'):'Belum pernah')}
 async function expo(list){await flush();const fs=[];
 for(const p of list){const cs=await chapsOf(p.id),ts=await tx('texts','readonly',s=>cs.map(c=>s.get(c.id)));cs.forEach((c,i)=>fs.push({name:`${safe(p.t)}/${pad(i+1)} - ${safe(c.t)}.txt`,text:ts[i]?ts[i].text:''}));const nt=await tx('texts','readonly',s=>s.get('n_'+p.id));if(nt&&nt.text.trim())fs.push({name:`${safe(p.t)}/_Catatan.txt`,text:nt.text});const nv=await getNN(p.id);if(nv.chars.length||nv.world.length)fs.push({name:`${safe(p.t)}/_NovelNotes.json`,text:JSON.stringify({chars:nv.chars.map(x=>({n:x.n,a:x.a})),world:nv.world.map(x=>({t:x.t,d:x.d}))},null,1)})}
 if(!fs.length)return toast('Belum ada bab untuk diekspor');
 if(!await dlf((list.length==1?safe(list[0].t):'LocalWriter-cadangan-'+new Date().toISOString().slice(0,10))+'.zip',zip(fs)))return;
-await put('settings',{k:'lb',v:Date.now()});toast('ZIP dibuat');if($('#files').classList.contains('on'))renderFiles();if($('#lib').classList.contains('on'))renderLib()}
+await put('settings',{k:'lb',v:Date.now()});toast('ZIP dibuat');if($('#files').classList.contains('on')||$('#backup').classList.contains('on'))renderFiles();if($('#lib').classList.contains('on'))renderLib()}
 $('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
 try{const g={};for(const x of await unzip(await f.arrayBuffer())){if(!/\.txt$|_NovelNotes\.json$/i.test(x.name))continue;const p=x.name.split('/'),fo=p.length>1?p[0]:f.name.replace(/\.zip$/i,'');(g[fo]=g[fo]||[]).push({fn:p[p.length-1],text:x.text})}
 const ex=(await tx('projects','readonly',s=>s.getAll())).map(p=>p.t);let n=0;

@@ -156,7 +156,7 @@ body.sq #np,body.sq #nav,body.sq #cont{display:none!important}
 <button class="btn act" id="ea"><span class="ico"><svg class="i"><use href="#i-upload"/></svg></span><span><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></span></button>
 <button class="btn act" id="ia"><span class="ico"><svg class="i"><use href="#i-download"/></svg></span><span><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></span></button>
 <input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn act" id="up"><span class="ico"><svg class="i"><use href="#i-refresh"/></svg></span><span><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></span></button>
-<div class="info"><svg class="i"><use href="#i-shield"/></svg><div><p id="use"></p><p id="pst"></p></div></div><p class="mu ver">LocalWriter v21.1</p></div></section>
+<div class="info"><svg class="i"><use href="#i-shield"/></svg><div><p id="use"></p><p id="pst"></p></div></div><p class="mu ver">LocalWriter v21.3</p></div></section>
 
 <section class="scr" id="chap"><div class="hd"><button class="ib" id="cb" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs" aria-label="Cari bab"><svg class="i"><use href="#i-search"/></svg></button><button class="ib" id="ca" aria-label="Bab baru"><svg class="i"><use href="#i-plus"/></svg></button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari di Semua Bab</button><button class="btn" id="cnn">Novel Notes</button><button class="btn" id="trb" hidden>Tempat Sampah</button></div></section>
@@ -201,11 +201,11 @@ const E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=nul
 const ico=n=>{const N='http://www.w3.org/2000/svg',s=document.createElementNS(N,'svg'),u=document.createElementNS(N,'use');s.setAttribute('class','i');u.setAttribute('href','#i-'+n);s.append(u);return s};
 const Ib=(n,l)=>{const b=E('button','ib');b.append(ico(n));b.setAttribute('aria-label',l||n);return b};
 const safe=s=>s.replace(/[\\/:*?"<>|]/g,'-').trim()||'tanpa-judul',pad=n=>String(n).padStart(2,'0');
-let chBack='lib';let db,P,C,chs=[],dirty=false,timer,cnt,reord=false,rmHide=false,cfg={...DEF};
+let chBack='lib';let db,P,C,chs=[],dirty=false,dirtySince=0,timer,cnt,reord=false,rmHide=false,cfg={...DEF};
 
 /* ===== IndexedDB ===== */
 const open=()=>new Promise((ok,no)=>{const r=indexedDB.open('localwriter',2);r.onupgradeneeded=()=>{const d=r.result,n=d.objectStoreNames;if(!n.contains('projects'))d.createObjectStore('projects',{keyPath:'id'});if(!n.contains('chapters'))d.createObjectStore('chapters',{keyPath:'id'}).createIndex('pid','pid');if(!n.contains('texts'))d.createObjectStore('texts',{keyPath:'id'});if(!n.contains('settings'))d.createObjectStore('settings',{keyPath:'k'});if(!n.contains('versions'))d.createObjectStore('versions',{keyPath:'id'}).createIndex('cid','cid')};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
-const tx=(st,m,f)=>new Promise((ok,no)=>{const t=db.transaction(st,m),r=f(...[].concat(st).map(s=>t.objectStore(s)));t.oncomplete=()=>ok(Array.isArray(r)?r.map(x=>x.result):r&&r.result);t.onerror=t.onabort=()=>no(t.error)});
+const tx=(st,m,f)=>new Promise((ok,no)=>{const t=db.transaction(st,m);let r;try{r=f(...[].concat(st).map(s=>t.objectStore(s)))}catch(e){try{t.abort()}catch(_){}no(e);return}t.oncomplete=()=>ok(Array.isArray(r)?r.map(x=>x.result):r&&r.result);t.onerror=t.onabort=()=>no(t.error)});
 const put=(s,o)=>tx(s,'readwrite',x=>{x.put(o)});
 const chapsOf=(id,all)=>tx('chapters','readonly',s=>s.index('pid').getAll(id)).then(a=>(all?a:a.filter(c=>!c.del)).sort((x,y)=>x.o-y.o));
 
@@ -218,7 +218,8 @@ function wc(t){if(!t)return 0;
 if(SEG){let n=0,p=0;for(const s of SEG.segment(t)){if(s.isWordLike){if(p!==2)n++;p=1}else p=p===1&&HY.test(s.segment)?2:0}return n}
 return(t.match(WRX)||[]).length}
 function stats(t){return[wc(t),t.replace(/[\r\n]/g,'').length-(t.match(/[\uD800-\uDBFF]/g)||[]).length,t.split('\n').filter(x=>x.trim()).length]}
-function count(){const[w,c,p]=stats($('#ta').value);$('#cn').textContent=`${fmt(w)} kata • ${fmt(c)} karakter • ${p} paragraf`}
+let stC={t:null,s:null};function statsC(t){if(stC.t===t)return stC.s;const r=stats(t);stC={t,s:r};return r}
+function count(){const[w,c,p]=statsC($('#ta').value);$('#cn').textContent=`${fmt(w)} kata • ${fmt(c)} karakter • ${p} paragraf`}
 
 /* ===== ZIP (tanpa library, mode simpan) ===== */
 const CT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
@@ -232,13 +233,31 @@ parts.push(h,nm,d);cd.push(c,nm);off+=30+nm.length+d.length}
 let cs=0;for(const x of cd)cs+=x.byteLength;
 const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,fs.length,true);e.setUint16(10,fs.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
 return new Blob([...parts,...cd,e],{type:'application/zip'})}
-async function unzip(buf){const v=new DataView(buf),u=new Uint8Array(buf),td=new TextDecoder(),out=[];let e=u.length-22;
-while(e>=0&&v.getUint32(e,true)!=0x06054b50)e--;if(e<0)throw 0;
-const n=v.getUint16(e+10,true);let p=v.getUint32(e+16,true);
-for(let i=0;i<n;i++){const m=v.getUint16(p+10,true),cs=v.getUint32(p+20,true),nl=v.getUint16(p+28,true),xl=v.getUint16(p+30,true),kl=v.getUint16(p+32,true),o=v.getUint32(p+42,true),name=td.decode(u.subarray(p+46,p+46+nl));p+=46+nl+xl+kl;
-if(name.endsWith('/'))continue;const s=o+30+v.getUint16(o+26,true)+v.getUint16(o+28,true);let d=u.subarray(s,s+cs);
-if(m==8)d=new Uint8Array(await new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());else if(m)continue;
-out.push({name,text:td.decode(d)})}return out}
+const ZL={file:50*2**20,entries:3000,entry:5*2**20,total:80*2**20,novels:200};
+const zerr=m=>{const e=new Error(m);e.zip=1;return e};
+async function inflate(d,max){const rd=new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate-raw')).getReader(),parts=[];let n=0;
+for(;;){const{done,value}=await rd.read();if(done)break;n+=value.length;if(n>max){try{await rd.cancel()}catch(e){}throw zerr('ZIP ditolak: hasil ekstrak melebihi ukuran yang tercatat')}parts.push(value)}
+const o=new Uint8Array(n);let q=0;for(const x of parts){o.set(x,q);q+=x.length}return o}
+async function unzip(buf){if(buf.byteLength>ZL.file)throw zerr('ZIP terlalu besar (maks 50 MB)');
+const v=new DataView(buf),u=new Uint8Array(buf),L=u.length,td=new TextDecoder('utf-8',{fatal:true}),out=[];
+let e=L-22;const lo=Math.max(0,L-65557);while(e>=lo&&v.getUint32(e,true)!=0x06054b50)e--;if(e<lo)throw zerr('Bukan berkas ZIP yang valid');
+const n=v.getUint16(e+10,true);let p=v.getUint32(e+16,true);if(n==0xFFFF||p==0xFFFFFFFF)throw zerr('ZIP64 tidak didukung');if(n>ZL.entries)throw zerr('Isi ZIP terlalu banyak (maks '+ZL.entries+' berkas)');
+let tot=0;
+for(let i=0;i<n;i++){if(p+46>L||v.getUint32(p,true)!=0x02014b50)throw zerr('Struktur ZIP rusak');
+const fl=v.getUint16(p+8,true),m=v.getUint16(p+10,true),cr=v.getUint32(p+16,true),cs=v.getUint32(p+20,true),us=v.getUint32(p+24,true),nl=v.getUint16(p+28,true),xl=v.getUint16(p+30,true),kl=v.getUint16(p+32,true),o=v.getUint32(p+42,true);
+if(p+46+nl>L)throw zerr('Struktur ZIP rusak');
+const name=new TextDecoder().decode(u.subarray(p+46,p+46+nl));p+=46+nl+xl+kl;
+if(name.endsWith('/')||!/\.txt$|_NovelNotes\.json$|_Info\.json$/i.test(name))continue;
+if(fl&1)throw zerr('ZIP terenkripsi tidak didukung');if(cs==0xFFFFFFFF||us==0xFFFFFFFF||o==0xFFFFFFFF)throw zerr('ZIP64 tidak didukung');
+if(us>ZL.entry)throw zerr('Berkas "'+name+'" terlalu besar (maks 5 MB per berkas)');tot+=us;if(tot>ZL.total)throw zerr('Total isi ZIP terlalu besar (maks 80 MB)');
+if(o+30>L||v.getUint32(o,true)!=0x04034b50)throw zerr('Struktur ZIP rusak');
+const st=o+30+v.getUint16(o+26,true)+v.getUint16(o+28,true);if(st+cs>L)throw zerr('Data ZIP terpotong (berkas tidak lengkap)');
+let d=u.subarray(st,st+cs);
+if(m==0){if(cs!=us)throw zerr('Struktur ZIP rusak')}else if(m==8)d=await inflate(d,us);else throw zerr('Metode kompresi ZIP tidak didukung');
+if(d.length!=us)throw zerr('Ukuran berkas "'+name+'" tidak sesuai');
+if(crc(d)!==cr)throw zerr('Berkas rusak (CRC tidak cocok): '+name);
+let text;try{text=td.decode(d)}catch(x){throw zerr('"'+name+'" bukan teks UTF-8 yang valid')}
+out.push({name,text})}return out}
 
 /* ===== UI util ===== */
 function sheet(t,items){const o=E('div','ov'),s=E('div','sh');s.append(E('b','',t));for(const[l,f,d]of items){const b=E('button','btn'+(d?' dn':''),l);b.onclick=()=>{o.remove();f()};s.append(b)}const c=E('button','btn','Batal');c.onclick=()=>o.remove();s.append(c);o.onclick=e=>{if(e.target==o)o.remove()};o.append(s);document.body.append(o)}
@@ -264,18 +283,18 @@ async function openP(p,ed){await flush();if(dirty)return toast('Tulisan belum te
 function setSt(ok,m){const s=$('#st');s.textContent=m||(ok?'● Tersimpan':'● Belum disimpan');s.className=ok?'ok':'no'}
 function hdr(){$('#h1').textContent=P.t;$('#h2').textContent=C.t+' ▾'}
 async function addCh(){await flush();const c={id:uid(),pid:P.id,o:chs.length?Math.max(...chs.map(x=>x.o))+1:0,t:'Bab '+pad(chs.length+1),w:0};chs.push(c);P.n=chs.length;P.u=Date.now();await tx(['chapters','texts','projects'],'readwrite',(a,b,p)=>{a.put(c);b.put({id:c.id,text:''});p.put(P)});return c}
-async function openC(c){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');const t=await tx('texts','readonly',s=>s.get(c.id));C=c;$('#ta').value=t?t.text:'';$('#ct').value=c.t;P.last=c.id;put('projects',P);hdr();count();{const w=stats($('#ta').value)[0];if(C.w!==w){C.w=w;put('chapters',{...C})}}setSt(true);show('ed');$('#ta').scrollTop=0}
-let sv=Promise.resolve(),fails=0;
+async function openC(c){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');const t=await tx('texts','readonly',s=>s.get(c.id));C=c;savedTx[c.id]=t?t.text:'';$('#ta').value=t?t.text:'';$('#ct').value=c.t;P.last=c.id;put('projects',P);hdr();count();{const w=stats($('#ta').value)[0];if(C.w!==w){C.w=w;put('chapters',{...C})}}setSt(true);show('ed');$('#ta').scrollTop=0}
+let sv=Promise.resolve(),fails=0;const savedTx={};
 const save=()=>sv=sv.then(doSave);
-async function doSave(){if(!dirty||!C)return;dirty=false;const cur=C,pj=P,x=$('#ta').value;cur.t=$('#ct').value.trim()||'Tanpa judul';cur.w=stats(x)[0];pj.u=Date.now();const c={...cur},p={...pj};
-try{let sn=0;await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);b.get(c.id).onsuccess=e=>{const o=e.target.result;if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();v.put({id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]});a.put({...c,sn});prune(v,c.id)}b.put({id:c.id,text:x})}});
-if(sn)cur.sn=sn;fails=0;if(C===cur){hdr();if(!dirty)setSt(true)}}
+async function doSave(){if(!dirty||!C)return;dirty=false;dirtySince=0;const cur=C,pj=P,x=$('#ta').value;cur.t=$('#ct').value.trim()||'Tanpa judul';cur.w=statsC(x)[0];pj.u=Date.now();const c={...cur},p={...pj};
+try{let sn=0;const pv=savedTx[c.id];await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);const snap=o=>{if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();v.put({id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]});a.put({...c,sn});prune(v,c.id)}};if(pv!==undefined){b.put({id:c.id,text:x});snap({text:pv})}else b.get(c.id).onsuccess=e=>{snap(e.target.result);b.put({id:c.id,text:x})}});
+savedTx[c.id]=x;if(sn)cur.sn=sn;fails=0;if(C===cur){hdr();if(!dirty)setSt(true)}}
 catch(e){dirty=true;fails++;if(C===cur)setSt(false,'● Gagal menyimpan, mencoba lagi...');if(fails==3)toast('Penyimpanan bermasalah. Ekspor ZIP untuk mengamankan tulisanmu.');clearTimeout(timer);timer=setTimeout(save,Math.min(3e4,2e3*2**fails))}}
 function flush(){if(dirty){clearTimeout(timer);save()}return sv}
 /* ===== Peringatan dua jendela ===== */
 function lockWin(){if(navigator.locks)navigator.locks.request('lw-editor',{ifAvailable:true},l=>{if(l)return new Promise(()=>{});$('#dw').classList.add('on')})}
 $('#dc').onclick=()=>{$('#dw').classList.remove('on');lockWin()};$('#dr').onclick=()=>$('#dw').classList.remove('on');
-function touch(){dirty=true;setSt(false);clearTimeout(timer);timer=setTimeout(save,3000);clearTimeout(cnt);cnt=setTimeout(count,250)}
+function touch(){dirty=true;if(!dirtySince)dirtySince=Date.now();setSt(false);clearTimeout(timer);const base=$('#ta').value.length>153600?2000:1000;timer=setTimeout(save,Math.min(base,Math.max(0,8000-(Date.now()-dirtySince))));clearTimeout(cnt);cnt=setTimeout(count,250)}
 
 /* ===== Bab ===== */
 function renderCh(){const q=$('#cq').value.toLowerCase(),box=$('#clist');box.replaceChildren();$('#ptit').textContent=P.t;$('#pn').textContent=chs.length+' bab';
@@ -296,26 +315,28 @@ if(!fs.length)return toast('Belum ada bab untuk diekspor');
 if(!await dlf((list.length==1?safe(list[0].t):'LocalWriter-cadangan-'+new Date().toISOString().slice(0,10))+'.zip',zip(fs)))return;
 await put('settings',{k:'lb',v:Date.now()});toast('ZIP dibuat');if($('#files').classList.contains('on')||$('#backup').classList.contains('on'))renderFiles();if($('#lib').classList.contains('on'))renderLib()}
 function choose(m,opts){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),end=x=>{o.remove();r(x)},pp=E('p','',m);pp.style.whiteSpace='pre-line';s.append(pp);for(const[k,l]of opts){const b=E('button','btn',l);b.onclick=()=>end(k);s.append(b)}const c=E('button','btn','Batal');c.onclick=()=>end(null);s.append(c);o.append(s);document.body.append(o)})}
-$('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
-try{await flush();const g={};for(const x of await unzip(await f.arrayBuffer())){if(!/\.txt$|_NovelNotes\.json$|_Info\.json$/i.test(x.name))continue;const p=x.name.split('/'),fo=p.length>1?p[0]:f.name.replace(/\.zip$/i,'');(g[fo]=g[fo]||[]).push({fn:p[p.length-1],text:x.text})}
+$('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(f.size>ZL.file)return toast('ZIP terlalu besar (maks 50 MB)');
+try{await flush();const g={};for(const x of await unzip(await f.arrayBuffer())){if(!/\.txt$|_NovelNotes\.json$|_Info\.json$/i.test(x.name))continue;const p=x.name.split('/'),fo=(p.length>1?p[0]:f.name.replace(/\.zip$/i,'')).trim().slice(0,200)||'Novel impor';(g[fo]=g[fo]||[]).push({fn:p[p.length-1],text:x.text})}
 const exs=await tx('projects','readonly',s=>s.getAll()),ex=exs.map(p=>p.t),ids=new Set(exs.map(p=>p.id)),en=[];
 for(const fo in g){const nn=g[fo].find(x=>x.fn=='_Catatan.txt'),nv=g[fo].find(x=>x.fn=='_NovelNotes.json'),fi=g[fo].find(x=>x.fn=='_Info.json'),inf=(()=>{try{return JSON.parse(fi.text)||{}}catch(e){return{}}})(),ti=typeof inf.novel=='string'&&inf.novel.trim()?inf.novel.trim().slice(0,200):fo,bt=fn=>{const b=Array.isArray(inf.bab)?inf.bab.find(y=>y&&y.file===fn):null;return b&&typeof b.judul=='string'&&b.judul.trim()?b.judul.trim().slice(0,200):''},l=g[fo].filter(x=>x.fn!='_Catatan.txt'&&x.fn!='_NovelNotes.json'&&x.fn!='_Info.json').sort((a,b)=>a.fn.localeCompare(b.fn,undefined,{numeric:true})),rid=typeof inf.id=='string'&&/^[A-Za-z0-9_-]{4,40}$/.test(inf.id)?inf.id:'',m=rid?exs.find(p=>p.id===rid):(fi?null:exs.find(p=>p.t===ti));
 en.push({nn,nv,l,ti,bt,rid,m})}
+if(en.length>ZL.novels)throw zerr('Terlalu banyak novel di ZIP (maks '+ZL.novels+')');
 const cf=en.filter(x=>x.m);let act='salin';
 if(cf.length){const nm=cf.slice(0,3).map(x=>'• '+x.m.t).join('\n')+(cf.length>3?'\n• dan '+(cf.length-3)+' lainnya':'');
 act=await choose(cf.length+' novel di ZIP sudah ada di aplikasi:\n'+nm+'\n\nMau diapakan?',[['lewati','Lewati (tidak diimpor)'],['timpa','Timpa isi bab yang ada'],['salin','Simpan sebagai salinan']]);
 if(!act)return toast('Impor dibatalkan');
 if(act=='timpa'&&!await yes('Timpa isi bab novel yang sudah ada dengan isi dari ZIP?\n\nBab yang ada sekarang dihapus beserta riwayat versinya. Tindakan ini tidak bisa dibatalkan. Sebaiknya ekspor backup dulu.','Timpa'))return toast('Impor dibatalkan')}
-let n=0,sk=0,ow=0;
+let n=0,sk=0,ow=0;const jobs=[];
 for(const x of en){const{nn,nv,l,bt}=x;
 if(x.m&&(act=='lewati'||(act=='timpa'&&!l.length))){sk++;continue}
 const ov=x.m&&act=='timpa',pid=ov?x.m.id:(x.rid&&!ids.has(x.rid)?x.rid:uid());ids.add(pid);
 const p={id:pid,t:ov?x.m.t:(x.m||ex.includes(x.ti)?x.ti+' (impor)':x.ti),u:Date.now(),n:l.length},
 cs=l.map((y,i)=>({id:uid(),pid:p.id,o:i,t:bt(y.fn)||y.fn.replace(/\.txt$/i,'').replace(/^\d+\s*-\s*/,'')||'Bab '+(i+1),w:stats(y.text)[0]})),
 old=ov?(await chapsOf(pid)).map(c=>c.id):[];
-await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{old.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});a.put(p);if(nn)c.put({id:'n_'+p.id,text:nn.text});if(nv)c.put(cleanNN(nv.text,p.id));cs.forEach((ch,i)=>{b.put(ch);c.put({id:ch.id,text:l[i].text})})});
-if(ov){ow++;if(P&&P.id==pid){P=C=null}}else n++}
-toast([n&&n+' proyek diimpor',ow&&ow+' ditimpa',sk&&sk+' dilewati'].filter(Boolean).join(', ')||'Tidak ada file .txt di ZIP');renderFiles()}catch(err){toast('File ZIP tidak valid')}};
+jobs.push({p,cs,l,nn,nv,old,ov})}
+if(jobs.length)await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{for(const j of jobs){j.old.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});a.put(j.p);if(j.nn)c.put({id:'n_'+j.p.id,text:j.nn.text});if(j.nv)c.put(cleanNN(j.nv.text,j.p.id));j.cs.forEach((ch,i)=>{b.put(ch);c.put({id:ch.id,text:j.l[i].text})})}});
+for(const j of jobs){if(j.ov){ow++;if(P&&P.id==j.p.id){P=C=null}}else n++}
+toast([n&&n+' proyek diimpor',ow&&ow+' ditimpa',sk&&sk+' dilewati'].filter(Boolean).join(', ')||'Tidak ada file .txt di ZIP');renderFiles()}catch(err){toast(err&&err.zip?err.message:'File ZIP tidak valid')}};
 
 /* ===== Pengaturan teks ===== */
 function applyCfg(){if(FM[cfg.ff])cfg.ff=FM[cfg.ff];const r=document.documentElement;r.style.setProperty('--ff',FF[cfg.ff]);r.style.setProperty('--fs',cfg.fs+'px');r.style.setProperty('--lh',cfg.lh);$('#ta').style.textAlign=cfg.al;$('#wlay').style.textAlign=cfg.al;
@@ -373,15 +394,15 @@ if(!rep)return;const r=$('#fp').value;
 if(!await yes(`Ganti ${fmt(tot)} kemunculan di ${hit.length} bab?\n${hit.slice(0,8).map(h=>`• ${chs[h[0]].t} (${h[1]})`).join('\n')}${hit.length>8?'\n…':''}\nVersi lama tiap bab disimpan di riwayat.`,'Ganti'))return;
 const nt=hit.map(h=>h[2].replace(re,()=>r));
 P.u=Date.now();await tx(['texts','chapters','versions','projects'],'readwrite',(t,a,v,pr)=>{hit.forEach((h,k)=>{const c=chs[h[0]];c.w=stats(nt[k])[0];v.put({id:uid()+k,cid:c.id,t:Date.now(),text:h[2],w:stats(h[2])[0]});prune(v,c.id);t.put({id:c.id,text:nt[k]});a.put({...c})});pr.put({...P})});
-hit.forEach((h,k)=>{if(C&&chs[h[0]].id==C.id){$('#ta').value=nt[k];count()}});
+hit.forEach((h,k)=>{savedTx[chs[h[0]].id]=nt[k];if(C&&chs[h[0]].id==C.id){$('#ta').value=nt[k];count()}});
 out.textContent=`Selesai: ${fmt(tot)} diganti di ${hit.length} bab.`;renderCh()}
 
 /* ===== Catatan proyek ===== */
-let nt2,ntP=null;
-const ntFlush=async()=>{clearTimeout(nt2);if(!ntP)return;const x=ntP;ntP=null;await put('texts',x)};
+let nt2,ntP=null,ntSince=0;
+const ntFlush=async()=>{clearTimeout(nt2);ntSince=0;if(!ntP)return;const x=ntP;ntP=null;await put('texts',x)};
 async function notesOpen(){$('#nta').value=NTX;$('#nt').classList.add('on')}
 async function notesClose(){ntP={id:'n_'+NP.id,text:$('#nta').value};await ntFlush();NTX=$('#nta').value;renderNN();$('#nt').classList.remove('on')}
-$('#nta').oninput=()=>{NTX=$('#nta').value;ntP={id:'n_'+NP.id,text:NTX};clearTimeout(nt2);nt2=setTimeout(ntFlush,2000)};
+$('#nta').oninput=()=>{NTX=$('#nta').value;ntP={id:'n_'+NP.id,text:NTX};if(!ntSince)ntSince=Date.now();clearTimeout(nt2);nt2=setTimeout(ntFlush,Math.min(1000,Math.max(0,8000-(Date.now()-ntSince))))};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)ntFlush()});addEventListener('pagehide',ntFlush);
 $('#fg').onclick=()=>frun(0);$('#fa').onclick=()=>frun(1);$('#fx2').onclick=()=>$('#fr').classList.remove('on');
 $('#cf').onclick=()=>{$('#frr').textContent='';$('#fr').classList.add('on')};

@@ -31,6 +31,7 @@ h1{margin:0;font-size:24px}b{font-weight:650}
 .in{width:100%;border:1px solid var(--ln);background:var(--card);color:var(--tx);border-radius:12px;padding:11px 14px;font-size:15px}
 .card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:10px;margin-bottom:10px}
 .th{width:64px;height:64px;border-radius:10px;flex:none;color:#ffffffcc;display:grid;place-items:center;font:700 26px LWMerri,serif}
+#nav #gs2{display:none}
 #nav{display:none;background:var(--card);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom)}
 #nav button{flex:1;background:0;border:0;color:var(--mu);padding:11px 0;font-size:13px}
 #nav button.a{color:var(--ac);font-weight:700}
@@ -143,6 +144,55 @@ body.sq #np,body.sq #nav,body.sq #cont{display:none!important}
 .trr .btn{width:auto;margin:0;padding:8px 12px;font-size:13px}
 #cont .card{border-left:4px solid var(--ac);cursor:pointer;margin-top:10px}#cont .cap{margin-top:0}
 #ndx .wr{font-size:14px}
+
+/* ===== Tata letak desktop (v22.1): hanya aktif di lebar >= 1024px, tampilan HP tidak berubah ===== */
+@media(min-width:1024px){
+*{scrollbar-width:thin;scrollbar-color:var(--ln) transparent}
+body{flex-direction:row}#app{min-width:0}
+#nav{order:-1;width:232px;flex:none;flex-direction:column;justify-content:flex-start;gap:4px;padding:20px 12px;border-top:0;border-right:1px solid var(--ln)}
+#nav::before{content:'LocalWriter';display:block;padding:4px 14px 18px;font:700 17px LWMerri,serif;color:var(--ac)}
+#nav button{flex:none;flex-direction:row;justify-content:flex-start;gap:12px;padding:11px 14px;font-size:14px;border-radius:12px}
+#nav button.a{background:var(--sel)}#nav button.a::after{display:none}
+#lib .brand{display:none}
+#lib .hd,#files .hd,#backup .hd,#lib .pad,#files .pad,#backup .pad{max-width:1040px;width:100%;margin-inline:auto}
+#lib .hd,#files .hd,#backup .hd{padding:28px 32px 8px}
+.tb{justify-content:center;gap:28px}#lib .pad,#files .pad,#backup .pad{padding:8px 32px 32px}
+#backup .hd,#backup .pad{max-width:720px}
+#lib .pad{display:flex;flex-direction:column}
+#rm{order:-3}#np{order:-2;position:static;align-self:flex-start;width:auto;margin:0 0 18px;padding:12px 24px}#q{order:-1;max-width:420px;margin-bottom:6px}
+#plist,#flist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}#plist .card,#flist .card{margin:0}
+#chap .hd,#chap .pad,#nn .hd,#nn .pad{max-width:820px;width:100%;margin-inline:auto}
+#chap .pad{display:flex;flex-direction:column;overflow:hidden}
+#clist{flex:1;min-height:0;overflow:auto}
+#chap .pad>.btn{flex:none;margin-top:6px;padding:10px;font-size:13px;box-shadow:none;border:1px solid var(--ln)}
+#app:has(#ed.on:not(.focus),#nn.on) #chap{display:flex;inset:0 auto 0 0;width:280px;z-index:1;border-right:1px solid var(--ln)}
+#app:has(#ed.on:not(.focus),#nn.on) :is(#ed,#nn){left:280px}
+#app:has(#ed.on:not(.focus),#nn.on) #chap .hd,#app:has(#ed.on:not(.focus),#nn.on) #chap .pad{max-width:none}
+#eb{display:none}#hd{pointer-events:none}
+#ct,#ta,#wlay{width:100%;max-width:780px;margin-left:auto;margin-right:auto}
+#ct{padding:28px 20px 6px;font-size:32px}#ta{padding:12px 20px 40px}
+#ed.wko{padding-right:320px}
+#ed.wko #wk{display:flex;position:absolute;top:0;right:0;bottom:0;width:320px;height:auto;max-height:none;border-radius:0;border-top:0;border-left:1px solid var(--ln);box-shadow:none;padding:14px 16px}
+#ed.wko .tb,#ed.wko .ft{display:flex}
+#ed.wko #ta,#ed.wko #ct{opacity:1;pointer-events:auto}
+.ov{align-items:center;padding:24px}
+.sh{max-width:480px;border-radius:22px;max-height:85vh;padding-bottom:20px;box-shadow:0 20px 60px rgba(0,0,0,.35)}.sh::before{display:none}
+#nt .sh{max-width:680px}.sh:has(.trr){max-width:720px}
+#nav #gs2{display:flex;margin-top:auto}#gs{display:none}
+#set .sh{display:grid;grid-template-columns:1fr 1fr;column-gap:28px;row-gap:14px;max-width:600px;align-content:start}
+#set .sh>:nth-child(1){grid-column:1/-1}
+#set .sh>:nth-child(4){grid-column:1;grid-row:3/5;align-self:start}
+#set .sh>:nth-child(5){grid-column:2;grid-row:3;margin:0}
+#set .sh>:nth-child(6){grid-column:2;grid-row:4}
+#set .sh>:nth-child(7){grid-column:1/-1;grid-row:5;margin:0}
+#set .sh>:nth-child(8){grid-column:1/-1;grid-row:6}
+#set .sh>:nth-child(9){grid-column:1/-1;grid-row:7;margin-top:6px!important}
+.toast{bottom:36px}
+.btn,.ib,.crow,.tb button,#nav button,.av,.wc,.wkt,.seg button,.card{cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+}
+@media(min-width:1024px) and (hover:hover){.btn:hover{filter:brightness(1.06)}.ib:hover,.tb button:hover,#nav button:hover,.crow:hover,.seg button:hover{background:var(--sel)}.card:hover{box-shadow:0 2px 4px rgba(10,60,80,.08),0 12px 28px rgba(10,60,80,.14)}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="19" r="1.3"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol><symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol><symbol id="i-focus" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6M3.5 13A9 9 0 1 0 6 6.7L3 10"/></symbol><symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6M20.5 13A9 9 0 1 1 18 6.7L21 10"/></symbol><symbol id="i-al" viewBox="0 0 24 24"><path d="M17 10H3M21 6H3M21 14H3M17 18H3"/></symbol><symbol id="i-ac" viewBox="0 0 24 24"><path d="M18 10H6M21 6H3M21 14H3M18 18H6"/></symbol><symbol id="i-ar" viewBox="0 0 24 24"><path d="M21 10H7M21 6H3M21 14H3M21 18H7"/></symbol><symbol id="i-aj" viewBox="0 0 24 24"><path d="M21 10H3M21 6H3M21 14H3M21 18H3"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol><symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol><symbol id="i-lib" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2zM22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol><symbol id="i-feather" viewBox="0 0 24 24"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.5V19h8.5zM16 8 2 22M17.5 15H9"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></symbol></svg>
 <div id="app">
@@ -156,7 +206,7 @@ body.sq #np,body.sq #nav,body.sq #cont{display:none!important}
 <button class="btn act" id="ea"><span class="ico"><svg class="i"><use href="#i-upload"/></svg></span><span><b>Ekspor Semua Proyek</b><div class="mu">Simpan semua novel sebagai file ZIP</div></span></button>
 <button class="btn act" id="ia"><span class="ico"><svg class="i"><use href="#i-download"/></svg></span><span><b>Impor ZIP Cadangan</b><div class="mu">Pulihkan proyek dari ZIP (satu folder = satu proyek)</div></span></button>
 <input type="file" id="imp" accept=".zip,application/zip" hidden><button class="btn act" id="up"><span class="ico"><svg class="i"><use href="#i-refresh"/></svg></span><span><b>Perbarui Aplikasi</b><div class="mu">Ambil versi terbaru, data novel tidak dihapus</div></span></button>
-<div class="info"><svg class="i"><use href="#i-shield"/></svg><div><p id="use"></p><p id="pst"></p></div></div><p class="mu ver">LocalWriter v21.3</p></div></section>
+<div class="info"><svg class="i"><use href="#i-shield"/></svg><div><p id="use"></p><p id="pst"></p></div></div><p class="mu ver">LocalWriter v22.3</p></div></section>
 
 <section class="scr" id="chap"><div class="hd"><button class="ib" id="cb" aria-label="Kembali"><svg class="i"><use href="#i-back"/></svg></button><h1 class="grow" style="font-size:20px">Daftar Bab</h1><button class="ib" id="cs" aria-label="Cari bab"><svg class="i"><use href="#i-search"/></svg></button><button class="ib" id="ca" aria-label="Bab baru"><svg class="i"><use href="#i-plus"/></svg></button></div>
 <div class="pad"><input id="cq" class="in" placeholder="Cari bab..." oninput="renderCh()"><div class="card row"><div class="grow"><b id="ptit"></b><div class="mu" id="pn"></div></div></div><div id="clist"></div><button class="btn" id="ro">Urutkan Bab</button><button class="btn" id="cf">Cari di Semua Bab</button><button class="btn" id="cnn">Novel Notes</button><button class="btn" id="trb" hidden>Tempat Sampah</button></div></section>
@@ -175,7 +225,7 @@ body.sq #np,body.sq #nav,body.sq #cont{display:none!important}
 <div id="ndet"><b class="grow" id="ndt"></b><button class="ib" id="nde" aria-label="Ubah karakter"><svg class="i"><use href="#i-edit"/></svg></button><button class="ib" id="ndd" aria-label="Hapus karakter"><svg class="i"><use href="#i-trash"/></svg></button></div><div id="ndx"></div>
 <div class="sec"><span class="grow">Dunia &amp; Lokasi</span><button class="ib" id="naw" aria-label="Tambah catatan dunia"><svg class="i"><use href="#i-plus"/></svg></button></div><div id="nworld"></div><div class="sec"><span class="grow">Catatan</span><button class="ib" id="nned" aria-label="Ubah catatan"><svg class="i"><use href="#i-edit"/></svg></button></div><div id="nnote" class="wr"></div></div></section>
 </div>
-<div id="nav"><button data-s="lib"><svg class="i"><use href="#i-lib"/></svg><span>Pustaka</span></button><button data-s="files"><svg class="i"><use href="#i-folder"/></svg><span>Berkas</span></button><button data-s="backup"><svg class="i"><use href="#i-cloud"/></svg><span>Cadangan</span></button></div>
+<div id="nav"><button data-s="lib"><svg class="i"><use href="#i-lib"/></svg><span>Pustaka</span></button><button data-s="files"><svg class="i"><use href="#i-folder"/></svg><span>Berkas</span></button><button data-s="backup"><svg class="i"><use href="#i-cloud"/></svg><span>Cadangan</span></button><button id="gs2" aria-label="Pengaturan teks"><svg class="i"><use href="#i-sliders"/></svg><span>Pengaturan</span></button></div>
 
 <div class="ov" id="dw"><div class="sh"><b>LocalWriter terbuka di jendela lain</b><p class="mu">Menulis di dua jendela sekaligus bisa saling menimpa tulisan. Tutup jendela yang lain, lalu ketuk "Coba lagi".</p><div class="row"><button class="btn" id="dr">Lanjut (berisiko)</button><button class="btn pri" id="dc">Coba lagi</button></div></div></div>
 <div class="ov" id="fr"><div class="sh"><div class="row"><b class="grow">Cari di Semua Bab</b><button class="ib" id="fx2" aria-label="Tutup"><svg class="i"><use href="#i-x"/></svg></button></div>
@@ -200,14 +250,41 @@ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s),uid=()=>
 const E=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
 const ico=n=>{const N='http://www.w3.org/2000/svg',s=document.createElementNS(N,'svg'),u=document.createElementNS(N,'use');s.setAttribute('class','i');u.setAttribute('href','#i-'+n);s.append(u);return s};
 const Ib=(n,l)=>{const b=E('button','ib');b.append(ico(n));b.setAttribute('aria-label',l||n);return b};
-const safe=s=>s.replace(/[\\/:*?"<>|]/g,'-').trim()||'tanpa-judul',pad=n=>String(n).padStart(2,'0');
-let chBack='lib';let db,P,C,chs=[],dirty=false,dirtySince=0,timer,cnt,reord=false,rmHide=false,cfg={...DEF};
+const safe=s=>{let r=String(s).replace(/[\u0000-\u001f\u007f]/g,'').replace(/[\\/:*?"<>|]/g,'-').trim().replace(/^\.+/,'_').replace(/[. ]+$/,'');
+r=Array.from(r).slice(0,100).join('').replace(/[. ]+$/,'');
+if(/^(con|prn|aux|nul|com[1-9]|lpt[1-9])(\..*)?$/i.test(r))r=r.replace(/^([^.]*)/,'$1_');
+return r||'tanpa-judul'},pad=n=>String(n).padStart(2,'0');
+let chBack='lib';let P,C,chs=[],dirty=false,dirtySince=0,timer,cnt,reord=false,rmHide=false,cfg={...DEF};
 
-/* ===== IndexedDB ===== */
-const open=()=>new Promise((ok,no)=>{const r=indexedDB.open('localwriter',2);r.onupgradeneeded=()=>{const d=r.result,n=d.objectStoreNames;if(!n.contains('projects'))d.createObjectStore('projects',{keyPath:'id'});if(!n.contains('chapters'))d.createObjectStore('chapters',{keyPath:'id'}).createIndex('pid','pid');if(!n.contains('texts'))d.createObjectStore('texts',{keyPath:'id'});if(!n.contains('settings'))d.createObjectStore('settings',{keyPath:'k'});if(!n.contains('versions'))d.createObjectStore('versions',{keyPath:'id'}).createIndex('cid','cid')};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+/* ===== Lapisan penyimpanan =====
+Semua akses data lewat objek Store (backend: IndexedDB). Backend lain cukup menyediakan antarmuka yang sama. */
+const Store=(()=>{let db;
+const open=()=>new Promise((ok,no)=>{const r=indexedDB.open('localwriter',2);r.onupgradeneeded=()=>{const d=r.result,n=d.objectStoreNames;if(!n.contains('projects'))d.createObjectStore('projects',{keyPath:'id'});if(!n.contains('chapters'))d.createObjectStore('chapters',{keyPath:'id'}).createIndex('pid','pid');if(!n.contains('texts'))d.createObjectStore('texts',{keyPath:'id'});if(!n.contains('settings'))d.createObjectStore('settings',{keyPath:'k'});if(!n.contains('versions'))d.createObjectStore('versions',{keyPath:'id'}).createIndex('cid','cid')};r.onsuccess=()=>{db=r.result;ok()};r.onerror=()=>no(r.error)});
 const tx=(st,m,f)=>new Promise((ok,no)=>{const t=db.transaction(st,m);let r;try{r=f(...[].concat(st).map(s=>t.objectStore(s)))}catch(e){try{t.abort()}catch(_){}no(e);return}t.oncomplete=()=>ok(Array.isArray(r)?r.map(x=>x.result):r&&r.result);t.onerror=t.onabort=()=>no(t.error)});
-const put=(s,o)=>tx(s,'readwrite',x=>{x.put(o)});
-const chapsOf=(id,all)=>tx('chapters','readonly',s=>s.index('pid').getAll(id)).then(a=>(all?a:a.filter(c=>!c.del)).sort((x,y)=>x.o-y.o));
+const prune=(v,cid)=>{v.index('cid').getAll(cid).onsuccess=e=>e.target.result.sort((a,b)=>b.t-a.t).slice(MAXV).forEach(r=>v.delete(r.id))},
+dv=(v,cid)=>{v.index('cid').getAllKeys(cid).onsuccess=e=>e.target.result.forEach(k=>v.delete(k))};
+const ALL=['projects','chapters','texts','versions'];
+return{open,
+get:(e,k)=>tx(e,'readonly',s=>s.get(k)),
+all:e=>tx(e,'readonly',s=>s.getAll()),
+keys:e=>tx(e,'readonly',s=>s.getAllKeys()),
+many:(e,ks)=>tx(e,'readonly',s=>ks.map(k=>s.get(k))),
+put:(e,o)=>tx(e,'readwrite',x=>{x.put(o)}),
+putAll:(e,a)=>tx(e,'readwrite',s=>{a.forEach(o=>{s.put(o)})}),
+chaptersOf:pid=>tx('chapters','readonly',s=>s.index('pid').getAll(pid)),
+versionsOf:cid=>tx('versions','readonly',s=>s.index('cid').getAll(cid)),
+addVersion:v=>tx('versions','readwrite',s=>{s.put(v);prune(s,v.cid)}),
+pruneVersions:cid=>tx('versions','readwrite',s=>{prune(s,cid)}),
+dropVersions:ids=>tx('versions','readwrite',s=>{ids.forEach(i=>s.delete(i))}),
+delProject:(pid,ids)=>tx(ALL,'readwrite',(a,b,c,v)=>{a.delete(pid);ids.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});c.delete('n_'+pid);c.delete('nn_'+pid)}),
+addChapter:(c,P)=>tx(['chapters','texts','projects'],'readwrite',(a,b,p)=>{a.put(c);b.put({id:c.id,text:''});p.put(P)}),
+saveChP:(c,P)=>tx(['chapters','projects'],'readwrite',(a,p)=>{a.put({...c});p.put({...P})}),
+saveChapter:(c,p,x,pv,snapFn)=>tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);const snap=o=>{const r=snapFn(o);if(r){v.put(r.v);a.put(r.c);prune(v,c.id)}};if(pv!==undefined){b.put({id:c.id,text:x});snap({text:pv})}else b.get(c.id).onsuccess=e=>{snap(e.target.result);b.put({id:c.id,text:x})}}),
+purge:ids=>tx(['chapters','texts','versions'],'readwrite',(a,b,v)=>{ids.forEach(i=>{a.delete(i);b.delete(i);dv(v,i)})}),
+replaceAll:(rh,P)=>tx(['texts','chapters','versions','projects'],'readwrite',(t,a,v,pr)=>{rh.forEach(h=>{v.put(h.v);prune(v,h.c.id);t.put({id:h.c.id,text:h.text});a.put(h.c)});pr.put(P)}),
+importJobs:jobs=>tx(ALL,'readwrite',(a,b,c,v)=>{for(const j of jobs){j.old.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});a.put(j.p);if(j.nn)c.put({id:'n_'+j.p.id,text:j.nn.text});if(j.nvo)c.put(j.nvo);j.cs.forEach((ch,i)=>{b.put(ch);c.put({id:ch.id,text:j.l[i].text})})}})}})();
+const put=(e,o)=>Store.put(e,o);
+const chapsOf=(id,all)=>Store.chaptersOf(id).then(a=>(all?a:a.filter(c=>!c.del)).sort((x,y)=>x.o-y.o));
 
 /* ===== Hitung kata & karakter ===== */
 /* Penghitung kata: Intl.Segmenter (isWordLike), tanda hubung tunggal menyatukan kata (anak-anak = 1) */
@@ -264,31 +341,32 @@ function sheet(t,items){const o=E('div','ov'),s=E('div','sh');s.append(E('b','',
 function toast(m){const t=E('div','toast',m);document.body.append(t);setTimeout(()=>t.remove(),2200)}
 function ask(t,v){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),i=E('input','in'),w=E('div','row'),c=E('button','btn','Batal'),k=E('button','btn pri','OK'),end=x=>{o.remove();r(x)};i.value=v||'';i.style.marginTop='12px';c.onclick=()=>end(null);k.onclick=()=>end(i.value);i.onkeydown=e=>{if(e.key=='Enter')end(i.value)};w.append(c,k);s.append(E('b','',t),i,w);o.append(s);document.body.append(o);i.focus();i.select()})}
 function yes(m,l){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),w=E('div','row'),c=E('button','btn','Batal'),k=E('button','btn'+(l?' pri':' dn'),l||'Hapus'),end=x=>{o.remove();r(x)};c.onclick=()=>end(false);k.onclick=()=>end(true);w.append(c,k);const pp=E('p','',m);pp.style.whiteSpace='pre-line';s.append(pp,w);o.append(s);document.body.append(o)})}
-function show(id){if(id!='ed'){wkClose(false);if($('#wbar').classList.contains('on'))wClose()}if(id!='lib')arm();$$('.scr').forEach(e=>e.classList.toggle('on',e.id==id));$('#nav').style.display=id=='lib'||id=='files'||id=='backup'?'flex':'none';$$('#nav button').forEach(b=>b.classList.toggle('a',b.dataset.s==id));if(id=='lib')renderLib();if(id=='files'||id=='backup')renderFiles();if(id=='ed')wkSync();if(id=='chap')trSync()}
+const DESK=matchMedia('(min-width:1024px)');DESK.onchange=()=>{if(DESK.matches&&P&&chs)renderCh()};
+function show(id){if(id!='ed'){wkClose(false);if($('#wbar').classList.contains('on'))wClose()}if(id!='lib')arm();$$('.scr').forEach(e=>e.classList.toggle('on',e.id==id));$('#nav').style.display=id=='lib'||id=='files'||id=='backup'?'flex':'none';$$('#nav button').forEach(b=>b.classList.toggle('a',b.dataset.s==id));if(id=='lib')renderLib();if(id=='files'||id=='backup')renderFiles();if(id=='ed')wkSync();if(id=='chap')trSync();if(DESK.matches&&P&&(id=='ed'||id=='nn'))renderCh()}
 const ago=t=>{const m=(Date.now()-t)/6e4;return m<1?'baru saja':m<60?Math.floor(m)+' menit lalu':m<1440?Math.floor(m/60)+' jam lalu':Math.floor(m/1440)+' hari lalu'};
 const grad=t=>{const h=185+Math.abs([...t].reduce((a,c)=>(a*31+c.charCodeAt(0))|0,7))%75;return`linear-gradient(135deg,hsl(${h} 52% 38%),hsl(${h+25} 55% 20%))`};
 
 /* ===== Pustaka ===== */
-async function renderLib(){remind();const q=$('#q').value.toLowerCase(),l=(await tx('projects','readonly',s=>s.getAll())).sort((a,b)=>b.u-a.u).filter(p=>p.t.toLowerCase().includes(q)),box=$('#plist');box.replaceChildren();
+async function renderLib(){remind();const q=$('#q').value.toLowerCase(),l=(await Store.all('projects')).sort((a,b)=>b.u-a.u).filter(p=>p.t.toLowerCase().includes(q)),box=$('#plist');box.replaceChildren();
 if(!l.length)box.append(E('p','mu','Belum ada proyek. Ketuk "Proyek Baru" untuk mulai menulis.'));
 for(const p of l){const r=E('div','card row'),th=E('div','th',p.t[0].toUpperCase()),b=E('div','grow');th.style.background=grad(p.t);b.append(E('b','',p.t),E('div','mu',p.n+' bab'),E('div','mu','Diubah '+ago(p.u)));
 const m=Ib('more','Menu');m.onclick=e=>{e.stopPropagation();pmenu(p)};r.append(th,b,m);r.onclick=()=>openP(p);box.append(r)}
-const ct=$('#cont');ct.replaceChildren();const p0=l[0];if(!q&&p0&&p0.last){const lc=await tx('chapters','readonly',s=>s.get(p0.last));if(lc&&!lc.del&&!$('#q').value){const cd=E('div','card row'),bd=E('div','grow');bd.append(E('div','mu cap','Lanjutkan menulis'),E('b','',p0.t+' • '+lc.t),E('div','mu',(lc.w||0)+' kata • Diubah '+ago(p0.u)));cd.append(bd);cd.onclick=()=>openP(p0,1);ct.append(cd)}}}
+const ct=$('#cont');ct.replaceChildren();const p0=l[0];if(!q&&p0&&p0.last){const lc=await Store.get('chapters',p0.last);if(lc&&!lc.del&&!$('#q').value){const cd=E('div','card row'),bd=E('div','grow');bd.append(E('div','mu cap','Lanjutkan menulis'),E('b','',p0.t+' • '+lc.t),E('div','mu',(lc.w||0)+' kata • Diubah '+ago(p0.u)));cd.append(bd);cd.onclick=()=>openP(p0,1);ct.append(cd)}}}
 function pmenu(p){sheet(p.t,[['Ubah nama',async()=>{const n=await ask('Nama proyek',p.t);if(n&&n.trim()){p.t=n.trim();await put('projects',p);renderLib()}}],['Novel Notes',()=>openNN(p,'lib')],['Ekspor...',()=>exportMenu(p)],['Hapus proyek',()=>delP(p),1]])}
-async function delP(p){if(!await yes(`Hapus "${p.t}" beserta semua babnya? Tindakan ini tidak bisa dibatalkan.`))return;const ids=(await chapsOf(p.id,1)).map(c=>c.id);await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{a.delete(p.id);ids.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});c.delete('n_'+p.id);c.delete('nn_'+p.id)});if(P&&P.id==p.id){P=C=null}renderLib()}
+async function delP(p){if(!await yes(`Hapus "${p.t}" beserta semua babnya? Tindakan ini tidak bisa dibatalkan.`))return;const ids=(await chapsOf(p.id,1)).map(c=>c.id);await Store.delProject(p.id,ids);if(P&&P.id==p.id){P=C=null}renderLib()}
 async function newP(){const t=await ask('Judul proyek baru');if(!t||!t.trim())return;const p={id:uid(),t:t.trim(),u:Date.now(),n:0};await put('projects',p);openP(p,1)}
 async function openP(p,ed){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');C=null;P=p;chs=await chapsOf(p.id);if(!chs.length)await addCh();if(ed)return openC(chs.find(c=>c.id==p.last)||chs[0]);$('#cq').value='';chBack='lib';renderCh();show('chap')}
 
 /* ===== Editor ===== */
 function setSt(ok,m){const s=$('#st');s.textContent=m||(ok?'● Tersimpan':'● Belum disimpan');s.className=ok?'ok':'no'}
 function hdr(){$('#h1').textContent=P.t;$('#h2').textContent=C.t+' ▾'}
-async function addCh(){await flush();const c={id:uid(),pid:P.id,o:chs.length?Math.max(...chs.map(x=>x.o))+1:0,t:'Bab '+pad(chs.length+1),w:0};chs.push(c);P.n=chs.length;P.u=Date.now();await tx(['chapters','texts','projects'],'readwrite',(a,b,p)=>{a.put(c);b.put({id:c.id,text:''});p.put(P)});return c}
-async function openC(c){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');const t=await tx('texts','readonly',s=>s.get(c.id));C=c;savedTx[c.id]=t?t.text:'';$('#ta').value=t?t.text:'';$('#ct').value=c.t;P.last=c.id;put('projects',P);hdr();count();{const w=stats($('#ta').value)[0];if(C.w!==w){C.w=w;put('chapters',{...C})}}setSt(true);show('ed');$('#ta').scrollTop=0}
+async function addCh(){await flush();const c={id:uid(),pid:P.id,o:chs.length?Math.max(...chs.map(x=>x.o))+1:0,t:'Bab '+pad(chs.length+1),w:0};chs.push(c);P.n=chs.length;P.u=Date.now();await Store.addChapter(c,P);return c}
+async function openC(c){await flush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');const t=await Store.get('texts',c.id);C=c;savedTx[c.id]=t?t.text:'';$('#ta').value=t?t.text:'';$('#ct').value=c.t;P.last=c.id;put('projects',P);hdr();count();{const w=stats($('#ta').value)[0];if(C.w!==w){C.w=w;put('chapters',{...C})}}setSt(true);show('ed');$('#ta').scrollTop=0}
 let sv=Promise.resolve(),fails=0;const savedTx={};
 const save=()=>sv=sv.then(doSave);
 async function doSave(){if(!dirty||!C)return;dirty=false;dirtySince=0;const cur=C,pj=P,x=$('#ta').value;cur.t=$('#ct').value.trim()||'Tanpa judul';cur.w=statsC(x)[0];pj.u=Date.now();const c={...cur},p={...pj};
-try{let sn=0;const pv=savedTx[c.id];await tx(['chapters','texts','projects','versions'],'readwrite',(a,b,d,v)=>{a.put(c);d.put(p);const snap=o=>{if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();v.put({id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]});a.put({...c,sn});prune(v,c.id)}};if(pv!==undefined){b.put({id:c.id,text:x});snap({text:pv})}else b.get(c.id).onsuccess=e=>{snap(e.target.result);b.put({id:c.id,text:x})}});
-savedTx[c.id]=x;if(sn)cur.sn=sn;fails=0;if(C===cur){hdr();if(!dirty)setSt(true)}}
+try{let sn=0;const pv=savedTx[c.id];await Store.saveChapter(c,p,x,pv,o=>{if(o&&o.text&&o.text!==x&&Date.now()-(c.sn||0)>9e5){sn=Date.now();return{v:{id:uid(),cid:c.id,t:sn,text:o.text,w:stats(o.text)[0]},c:{...c,sn}}}});
+savedTx[c.id]=x;if(sn)cur.sn=sn;fails=0;if(C===cur){hdr();if(DESK.matches)renderCh();if(!dirty)setSt(true)}}
 catch(e){dirty=true;fails++;if(C===cur)setSt(false,'● Gagal menyimpan, mencoba lagi...');if(fails==3)toast('Penyimpanan bermasalah. Ekspor ZIP untuk mengamankan tulisanmu.');clearTimeout(timer);timer=setTimeout(save,Math.min(3e4,2e3*2**fails))}}
 function flush(){if(dirty){clearTimeout(timer);save()}return sv}
 /* ===== Peringatan dua jendela ===== */
@@ -301,23 +379,23 @@ function renderCh(){const q=$('#cq').value.toLowerCase(),box=$('#clist');box.rep
 chs.forEach((c,i)=>{if(!c.t.toLowerCase().includes(q))return;const r=E('div','row crow'+(C&&C.id==c.id?' cur':'')),b=E('div','grow');b.append(E('b','',`${i+1}. ${c.t}`),E('div','mu',fmt(c.w||0)+' kata'));r.append(b);
 if(reord){const u=Ib('up','Naik'),d=Ib('down','Turun');u.onclick=()=>mv(i,-1);d.onclick=()=>mv(i,1);r.append(u,d)}
 else{const m=Ib('more','Menu');m.onclick=e=>{e.stopPropagation();cmenu(c)};r.append(m);r.onclick=()=>openC(c)}box.append(r)})}
-async function mv(i,d){const j=i+d;if(j<0||j>=chs.length)return;[chs[i],chs[j]]=[chs[j],chs[i]];chs.forEach((c,k)=>c.o=k);const a=chs.map(c=>({...c}));await tx('chapters','readwrite',s=>{a.forEach(c=>{s.put(c)})});renderCh()}
-function cmenu(c){sheet(c.t,[['Ubah nama',async()=>{const n=await ask('Judul bab',c.t);if(n&&n.trim()){c.t=n.trim();await put('chapters',{...c});if(C&&C.id==c.id)$('#ct').value=c.t;renderCh()}}],['Ekspor bab (.txt)',()=>expoCh(c)],['Hapus bab',async()=>{if(!await yes(`Pindahkan "${c.t}" ke Tempat Sampah? Kamu masih bisa memulihkannya dari Daftar Bab.`,'Pindahkan'))return;chs=chs.filter(x=>x!=c);P.n=chs.length;c.del=Date.now();await tx(['chapters','projects'],'readwrite',(a,p)=>{a.put({...c});p.put({...P})});if(C&&C.id==c.id){C=null;dirty=false}renderCh();trSync()},1]])}
+async function mv(i,d){const j=i+d;if(j<0||j>=chs.length)return;[chs[i],chs[j]]=[chs[j],chs[i]];chs.forEach((c,k)=>c.o=k);const a=chs.map(c=>({...c}));await Store.putAll('chapters',a);renderCh()}
+function cmenu(c){sheet(c.t,[['Ubah nama',async()=>{const n=await ask('Judul bab',c.t);if(n&&n.trim()){c.t=n.trim();await put('chapters',{...c});if(C&&C.id==c.id)$('#ct').value=c.t;renderCh()}}],['Ekspor bab (.txt)',()=>expoCh(c)],['Hapus bab',async()=>{if(!await yes(`Pindahkan "${c.t}" ke Tempat Sampah? Kamu masih bisa memulihkannya dari Daftar Bab.`,'Pindahkan'))return;chs=chs.filter(x=>x!=c);P.n=chs.length;c.del=Date.now();await Store.saveChP(c,P);if(C&&C.id==c.id){C=null;dirty=false}renderCh();trSync()},1]])}
 
 /* ===== Berkas & Cadangan ===== */
-async function renderFiles(){const l=(await tx('projects','readonly',s=>s.getAll())).sort((a,b)=>b.u-a.u),box=$('#flist');box.replaceChildren();
+async function renderFiles(){const l=(await Store.all('projects')).sort((a,b)=>b.u-a.u),box=$('#flist');box.replaceChildren();
 for(const p of l){const r=E('div','card row'),b=E('div','grow'),x=E('button','btn sm','Ekspor');b.append(E('b','',p.t),E('div','mu',p.n+' bab'));x.onclick=e=>{e.stopPropagation();exportMenu(p)};const fi=E('span','fico');fi.append(ico('folder'));r.append(fi,b,x);r.onclick=()=>openP(p);box.append(r)}
 if(!l.length)box.append(E('p','mu','Belum ada folder proyek.'));
-const ps=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():false;$('#pst').textContent=ps?'Penyimpanan permanen: aktif.':'Penyimpanan permanen: belum aktif, browser masih boleh menghapus data saat memori HP penuh.';const sz=b=>b<1048576?Math.round(b/1024)+' KB':b<1073741824?(b/1048576).toFixed(1)+' MB':(b/1073741824).toFixed(1)+' GB',es=navigator.storage&&navigator.storage.estimate?await navigator.storage.estimate():null;$('#use').textContent=es?`Terpakai (perkiraan): ${sz(es.usage)}. Jatah dari browser masih tersisa sekitar ${sz(Math.max(0,es.quota-es.usage))}. Ini batas dari browser, bukan sisa memori HP, jadi bisa lebih besar dari ruang kosong HP-mu.`:'';const lb=await tx('settings','readonly',s=>s.get('lb'));$('#lb').textContent='Cadangan terakhir: '+(lb?new Date(lb.v).toLocaleString('id-ID'):'Belum pernah')}
+const ps=navigator.storage&&navigator.storage.persisted?await navigator.storage.persisted():false;$('#pst').textContent=ps?'Penyimpanan permanen: aktif.':'Penyimpanan permanen: belum aktif, browser masih boleh menghapus data saat memori HP penuh.';const sz=b=>b<1048576?Math.round(b/1024)+' KB':b<1073741824?(b/1048576).toFixed(1)+' MB':(b/1073741824).toFixed(1)+' GB',es=navigator.storage&&navigator.storage.estimate?await navigator.storage.estimate():null;$('#use').textContent=es?`Terpakai (perkiraan): ${sz(es.usage)}.`:'';const lb=await Store.get('settings','lb');$('#lb').textContent='Cadangan terakhir: '+(lb?new Date(lb.v).toLocaleString('id-ID'):'Belum pernah')}
 async function expo(list){await flush();await ntFlush();const fs=[],used=new Set();
-for(const p of list){const cs=await chapsOf(p.id),ts=await tx('texts','readonly',s=>cs.map(c=>s.get(c.id)));let fo=safe(p.t),k=2;while(used.has(fo.toLowerCase()))fo=safe(p.t)+' ('+(k++)+')';used.add(fo.toLowerCase());const nms=cs.map((c,i)=>`${pad(i+1)} - ${safe(c.t)}.txt`);cs.forEach((c,i)=>fs.push({name:`${fo}/${nms[i]}`,text:ts[i]?ts[i].text:''}));if(cs.length)fs.push({name:`${fo}/_Info.json`,text:JSON.stringify({id:p.id,novel:p.t,bab:cs.map((c,i)=>({file:nms[i],judul:c.t}))},null,1)});const nt=await tx('texts','readonly',s=>s.get('n_'+p.id));if(nt&&nt.text.trim())fs.push({name:`${fo}/_Catatan.txt`,text:nt.text});const nv=await getNN(p.id);if(nv.chars.length||nv.world.length)fs.push({name:`${fo}/_NovelNotes.json`,text:JSON.stringify({chars:nv.chars.map(x=>({n:x.n,a:x.a,p:x.p||'',l:x.l||'',c:x.c||'',off:x.off?1:0})),world:nv.world.map(x=>({t:x.t,d:x.d}))},null,1)})}
+for(const p of list){const cs=await chapsOf(p.id),ts=await Store.many('texts',cs.map(c=>c.id));let fo=safe(p.t),k=2;while(used.has(fo.toLowerCase()))fo=safe(p.t)+' ('+(k++)+')';used.add(fo.toLowerCase());const nms=cs.map((c,i)=>`${pad(i+1)} - ${safe(c.t)}.txt`);cs.forEach((c,i)=>fs.push({name:`${fo}/${nms[i]}`,text:ts[i]?ts[i].text:''}));if(cs.length)fs.push({name:`${fo}/_Info.json`,text:JSON.stringify({id:p.id,novel:p.t,bab:cs.map((c,i)=>({file:nms[i],judul:c.t}))},null,1)});const nt=await Store.get('texts','n_'+p.id);if(nt&&nt.text.trim())fs.push({name:`${fo}/_Catatan.txt`,text:nt.text});const nv=await getNN(p.id);if(nv.chars.length||nv.world.length)fs.push({name:`${fo}/_NovelNotes.json`,text:JSON.stringify({chars:nv.chars.map(x=>({n:x.n,a:x.a,p:x.p||'',l:x.l||'',c:x.c||'',off:x.off?1:0})),world:nv.world.map(x=>({t:x.t,d:x.d}))},null,1)})}
 if(!fs.length)return toast('Belum ada bab untuk diekspor');
 if(!await dlf((list.length==1?safe(list[0].t):'LocalWriter-cadangan-'+new Date().toISOString().slice(0,10))+'.zip',zip(fs)))return;
 await put('settings',{k:'lb',v:Date.now()});toast('ZIP dibuat');if($('#files').classList.contains('on')||$('#backup').classList.contains('on'))renderFiles();if($('#lib').classList.contains('on'))renderLib()}
 function choose(m,opts){return new Promise(r=>{const o=E('div','ov'),s=E('div','sh'),end=x=>{o.remove();r(x)},pp=E('p','',m);pp.style.whiteSpace='pre-line';s.append(pp);for(const[k,l]of opts){const b=E('button','btn',l);b.onclick=()=>end(k);s.append(b)}const c=E('button','btn','Batal');c.onclick=()=>end(null);s.append(c);o.append(s);document.body.append(o)})}
 $('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(f.size>ZL.file)return toast('ZIP terlalu besar (maks 50 MB)');
 try{await flush();const g={};for(const x of await unzip(await f.arrayBuffer())){if(!/\.txt$|_NovelNotes\.json$|_Info\.json$/i.test(x.name))continue;const p=x.name.split('/'),fo=(p.length>1?p[0]:f.name.replace(/\.zip$/i,'')).trim().slice(0,200)||'Novel impor';(g[fo]=g[fo]||[]).push({fn:p[p.length-1],text:x.text})}
-const exs=await tx('projects','readonly',s=>s.getAll()),ex=exs.map(p=>p.t),ids=new Set(exs.map(p=>p.id)),en=[];
+const exs=await Store.all('projects'),ex=exs.map(p=>p.t),ids=new Set(exs.map(p=>p.id)),en=[];
 for(const fo in g){const nn=g[fo].find(x=>x.fn=='_Catatan.txt'),nv=g[fo].find(x=>x.fn=='_NovelNotes.json'),fi=g[fo].find(x=>x.fn=='_Info.json'),inf=(()=>{try{return JSON.parse(fi.text)||{}}catch(e){return{}}})(),ti=typeof inf.novel=='string'&&inf.novel.trim()?inf.novel.trim().slice(0,200):fo,bt=fn=>{const b=Array.isArray(inf.bab)?inf.bab.find(y=>y&&y.file===fn):null;return b&&typeof b.judul=='string'&&b.judul.trim()?b.judul.trim().slice(0,200):''},l=g[fo].filter(x=>x.fn!='_Catatan.txt'&&x.fn!='_NovelNotes.json'&&x.fn!='_Info.json').sort((a,b)=>a.fn.localeCompare(b.fn,undefined,{numeric:true})),rid=typeof inf.id=='string'&&/^[A-Za-z0-9_-]{4,40}$/.test(inf.id)?inf.id:'',m=rid?exs.find(p=>p.id===rid):(fi?null:exs.find(p=>p.t===ti));
 en.push({nn,nv,l,ti,bt,rid,m})}
 if(en.length>ZL.novels)throw zerr('Terlalu banyak novel di ZIP (maks '+ZL.novels+')');
@@ -334,7 +412,7 @@ const p={id:pid,t:ov?x.m.t:(x.m||ex.includes(x.ti)?x.ti+' (impor)':x.ti),u:Date.
 cs=l.map((y,i)=>({id:uid(),pid:p.id,o:i,t:bt(y.fn)||y.fn.replace(/\.txt$/i,'').replace(/^\d+\s*-\s*/,'')||'Bab '+(i+1),w:stats(y.text)[0]})),
 old=ov?(await chapsOf(pid)).map(c=>c.id):[];
 jobs.push({p,cs,l,nn,nv,old,ov})}
-if(jobs.length)await tx(['projects','chapters','texts','versions'],'readwrite',(a,b,c,v)=>{for(const j of jobs){j.old.forEach(i=>{b.delete(i);c.delete(i);dv(v,i)});a.put(j.p);if(j.nn)c.put({id:'n_'+j.p.id,text:j.nn.text});if(j.nv)c.put(cleanNN(j.nv.text,j.p.id));j.cs.forEach((ch,i)=>{b.put(ch);c.put({id:ch.id,text:j.l[i].text})})}});
+jobs.forEach(j=>{j.nvo=j.nv?cleanNN(j.nv.text,j.p.id):null});if(jobs.length)await Store.importJobs(jobs);
 for(const j of jobs){if(j.ov){ow++;if(P&&P.id==j.p.id){P=C=null}}else n++}
 toast([n&&n+' proyek diimpor',ow&&ow+' ditimpa',sk&&sk+' dilewati'].filter(Boolean).join(', ')||'Tidak ada file .txt di ZIP');renderFiles()}catch(err){toast(err&&err.zip?err.message:'File ZIP tidak valid')}};
 
@@ -349,51 +427,50 @@ $('#sf').onchange=e=>setCfg('ff',e.target.value);$('#ss').onchange=e=>setCfg('fs
 $$('[data-a]').forEach(b=>b.onclick=()=>setCfg('al',b.dataset.a));$$('[data-th]').forEach(b=>b.onclick=()=>setCfg('th',b.dataset.th));
 $('#sr').onclick=()=>{cfg={...DEF};applyCfg();put('settings',{k:'cfg',v:cfg})};
 $('#sd').onclick=$('#sx').onclick=()=>$('#set').classList.remove('on');
-$('#gs').onclick=$('#aa').onclick=()=>$('#set').classList.add('on');
+$('#gs').onclick=$('#gs2').onclick=$('#aa').onclick=()=>$('#set').classList.add('on');
 
 /* ===== Unduh, ekspor teks ===== */
 async function dlf(name,data){const dl=window.claude&&claude.use?await claude.use('downloads'):null;
 if(dl){try{await dl.save({filename:name,data});return 1}catch(e){toast(e.code=='declined'?'Ekspor dibatalkan':'Gagal mengekspor');return 0}}
 const a=document.createElement('a');a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:'text/plain'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),6e4);return 1}
 function exportMenu(p){sheet('Ekspor '+p.t,[['ZIP (satu file per bab)',()=>expo([p])],['Satu file .txt (seluruh novel)',()=>expoTxt(p)]])}
-async function expoTxt(p){await flush();const cs=await chapsOf(p.id);if(!cs.length)return toast('Belum ada bab untuk diekspor');const ts=await tx('texts','readonly',s=>cs.map(c=>s.get(c.id)));
+async function expoTxt(p){await flush();const cs=await chapsOf(p.id);if(!cs.length)return toast('Belum ada bab untuk diekspor');const ts=await Store.many('texts',cs.map(c=>c.id));
 await dlf(safe(p.t)+'.txt',p.t+'\n\n'+cs.map((c,i)=>`${c.t}\n\n${ts[i]?ts[i].text:''}`).join('\n\n\n'))}
-async function expoCh(c){await flush();const t=await tx('texts','readonly',s=>s.get(c.id));await dlf(safe(c.t)+'.txt',c.t+'\n\n'+(t?t.text:''))}
+async function expoCh(c){await flush();const t=await Store.get('texts',c.id);await dlf(safe(c.t)+'.txt',c.t+'\n\n'+(t?t.text:''))}
 
 /* ===== Pengingat backup ===== */
-async function remind(){const rm=$('#rm'),lb=await tx('settings','readonly',s=>s.get('lb')),d=lb?(Date.now()-lb.v)/864e5:99,w=(await tx('chapters','readonly',s=>s.getAll())).reduce((a,c)=>a+(c.del?0:c.w||0),0);
+async function remind(){const rm=$('#rm'),lb=await Store.get('settings','lb'),d=lb?(Date.now()-lb.v)/864e5:99,w=(await Store.all('chapters')).reduce((a,c)=>a+(c.del?0:c.w||0),0);
 if(rmHide||w<1||d<7){rm.style.display='none';return}
 const r=E('div','row'),a=E('button','btn pri sm','Ekspor semua'),n=E('button','btn sm','Nanti');r.style.marginTop='10px';
-a.onclick=async()=>expo(await tx('projects','readonly',s=>s.getAll()));n.onclick=()=>{rmHide=true;rm.style.display='none'};r.append(a,n);
+a.onclick=async()=>expo(await Store.all('projects'));n.onclick=()=>{rmHide=true;rm.style.display='none'};r.append(a,n);
 rm.replaceChildren(E('b','',lb?`Terakhir backup ${Math.floor(d)} hari lalu`:'Belum pernah backup'),E('div','mu','Ekspor ZIP supaya tulisanmu aman dari penghapusan data browser.'),r);rm.style.display='block'}
 
 /* ===== Riwayat versi ===== */
 /* ===== Batas riwayat versi: maksimal 5 per bab ===== */
-const MAXV=5,prune=(v,cid)=>{v.index('cid').getAll(cid).onsuccess=e=>e.target.result.sort((a,b)=>b.t-a.t).slice(MAXV).forEach(r=>v.delete(r.id))},
-dv=(v,cid)=>{v.index('cid').getAllKeys(cid).onsuccess=e=>e.target.result.forEach(k=>v.delete(k))};
-async function migV(){if(await tx('settings','readonly',s=>s.get('vp5')))return;
-const[vs,cs]=await Promise.all([tx('versions','readonly',s=>s.getAll()),tx('chapters','readonly',s=>s.getAllKeys())]),ok=new Set(cs),g={},del=[];
+const MAXV=5;
+async function migV(){if(await Store.get('settings','vp5'))return;
+const[vs,cs]=await Promise.all([Store.all('versions'),Store.keys('chapters')]),ok=new Set(cs),g={},del=[];
 vs.forEach(r=>{(g[r.cid]=g[r.cid]||[]).push(r)});
 for(const k in g){const l=g[k].sort((a,b)=>b.t-a.t);(ok.has(k)?l.slice(MAXV):l).forEach(r=>del.push(r.id))}
-if(del.length)await tx('versions','readwrite',v=>{del.forEach(i=>v.delete(i))});await put('settings',{k:'vp5',v:1})}
-const snap=x=>tx('versions','readwrite',v=>{v.put({id:uid(),cid:C.id,t:Date.now(),text:x,w:stats(x)[0]});prune(v,C.id)});
+if(del.length)await Store.dropVersions(del);await put('settings',{k:'vp5',v:1})}
+const snap=x=>Store.addVersion({id:uid(),cid:C.id,t:Date.now(),text:x,w:stats(x)[0]});
 async function snapNow(){await flush();const x=$('#ta').value;if(!x.trim())return toast('Bab masih kosong');await snap(x);C.sn=Date.now();put('chapters',{...C});toast('Versi disimpan')}
 const dt=t=>new Date(t).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-async function hist(){if(!C)return;await flush();await tx('versions','readwrite',v=>{prune(v,C.id)});const l=(await tx('versions','readonly',s=>s.index('cid').getAll(C.id))).sort((a,b)=>b.t-a.t);
+async function hist(){if(!C)return;await flush();await Store.pruneVersions(C.id);const l=(await Store.versionsOf(C.id)).sort((a,b)=>b.t-a.t);
 sheet('Riwayat versi (maks. 5)',[['Simpan versi sekarang',snapNow],...l.map(v=>[`${dt(v.t)} • ${fmt(v.w)} kata`,()=>restore(v)])])}
 async function restore(v){if(!await yes(`Kembalikan ke versi ${dt(v.t)}? Versi saat ini disimpan dulu.`,'Kembalikan'))return;await snap($('#ta').value);$('#ta').value=v.text;touch();await save();count();toast('Versi dikembalikan')}
 
 /* ===== Cari & ganti ===== */
 const rx=(f,cs)=>new RegExp(f.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),cs?'g':'gi');
 async function frun(rep){await flush();const f=$('#ff').value,out=$('#frr');if(!f){out.textContent='Isi kata yang dicari.';return}
-const re=rx(f,$('#fc').checked),ts=await tx('texts','readonly',s=>chs.map(c=>s.get(c.id))),hit=[];let tot=0;
+const re=rx(f,$('#fc').checked),ts=await Store.many('texts',chs.map(c=>c.id)),hit=[];let tot=0;
 ts.forEach((t,i)=>{const n=t?(t.text.match(re)||[]).length:0;if(n){hit.push([i,n,t.text]);tot+=n}});
 if(!hit.length){out.textContent='Tidak ditemukan.';return}
 out.replaceChildren(E('div','',`${fmt(tot)} hasil di ${hit.length} bab. Ketuk bab untuk melihat sorotan dan mengganti satu per satu.`),...hit.map(h=>{const r=E('div','wr',`${chs[h[0]].t} (${h[1]})`);r.style.cursor='pointer';r.onclick=async()=>{$('#fr').classList.remove('on');await openC(chs[h[0]]);wOpen($('#ff').value,$('#fc').checked)};return r}));
 if(!rep)return;const r=$('#fp').value;
 if(!await yes(`Ganti ${fmt(tot)} kemunculan di ${hit.length} bab?\n${hit.slice(0,8).map(h=>`• ${chs[h[0]].t} (${h[1]})`).join('\n')}${hit.length>8?'\n…':''}\nVersi lama tiap bab disimpan di riwayat.`,'Ganti'))return;
 const nt=hit.map(h=>h[2].replace(re,()=>r));
-P.u=Date.now();await tx(['texts','chapters','versions','projects'],'readwrite',(t,a,v,pr)=>{hit.forEach((h,k)=>{const c=chs[h[0]];c.w=stats(nt[k])[0];v.put({id:uid()+k,cid:c.id,t:Date.now(),text:h[2],w:stats(h[2])[0]});prune(v,c.id);t.put({id:c.id,text:nt[k]});a.put({...c})});pr.put({...P})});
+P.u=Date.now();{const rh=hit.map((h,k)=>{const c=chs[h[0]];c.w=stats(nt[k])[0];return{v:{id:uid()+k,cid:c.id,t:Date.now(),text:h[2],w:stats(h[2])[0]},c:{...c},text:nt[k]}});await Store.replaceAll(rh,{...P})};
 hit.forEach((h,k)=>{savedTx[chs[h[0]].id]=nt[k];if(C&&chs[h[0]].id==C.id){$('#ta').value=nt[k];count()}});
 out.textContent=`Selesai: ${fmt(tot)} diganti di ${hit.length} bab.`;renderCh()}
 
@@ -413,7 +490,7 @@ if(window.visualViewport){const vv=visualViewport,f=()=>{document.body.style.hei
 
 /* ===== Novel Notes: karakter + dunia & lokasi (disimpan di store 'texts' dengan id nn_<proyek>) ===== */
 let NN,NP,NTX='',nsel=null,nfrom='chap';
-const getNN=async pid=>{const o=await tx('texts','readonly',s=>s.get('nn_'+pid));return o&&Array.isArray(o.chars)&&Array.isArray(o.world)?o:{id:'nn_'+pid,chars:[],world:[]}};
+const getNN=async pid=>{const o=await Store.get('texts','nn_'+pid);return o&&Array.isArray(o.chars)&&Array.isArray(o.world)?o:{id:'nn_'+pid,chars:[],world:[]}};
 const saveNN=()=>put('texts',NN);
 function cleanNN(txt,pid){let o={};try{o=JSON.parse(txt)||{}}catch(e){}const s=(v,n)=>String(v==null?'':v).slice(0,n);
 return{id:'nn_'+pid,chars:(Array.isArray(o.chars)?o.chars:[]).slice(0,500).map((x,i)=>({id:uid()+i,n:s(x&&x.n,60),a:s(x&&x.a,10),p:s(x&&x.p,80),l:s(x&&x.l,120),c:s(x&&x.c,600),off:x&&x.off?1:0})),world:(Array.isArray(o.world)?o.world:[]).slice(0,1000).map((x,i)=>({id:uid()+i,t:s(x&&x.t,100),d:s(x&&x.d,500)}))}}
@@ -424,7 +501,7 @@ if(f.lb){const lb=E('div','mu',f.lb);lb.style.cssText='margin-top:10px;font-size
 const i=E(f.big?'textarea':'input','in');i.placeholder=f.ph;i.value=f.v||'';i.maxLength=f.max;i.style.marginTop=f.lb?'4px':'10px';if(f.big){i.style.height=(f.h||90)+'px';i.style.resize='none';i.style.font='inherit'}els.push(i);return i}),
 c=E('button','btn','Batal'),k=E('button','btn pri','Simpan');c.onclick=()=>end(null);k.onclick=()=>end(ins.map(i=>i.type=='checkbox'?(i.checked?'1':''):i.value.trim()));
 w.append(c,k);s.append(E('b','',t),...els,w);if(del){const d=E('button','btn dn','Hapus');d.onclick=()=>end('del');s.append(d)}o.append(s);document.body.append(o);ins[0].focus()})}
-async function openNN(p,from){await ntFlush();NP=p;nfrom=from;NN=await getNN(p.id);const nt0=await tx('texts','readonly',s=>s.get('n_'+p.id));NTX=nt0?nt0.text:'';nsel=null;$('#nph').textContent=p.t;renderNN();show('nn')}
+async function openNN(p,from){await ntFlush();NP=p;nfrom=from;NN=await getNN(p.id);const nt0=await Store.get('texts','n_'+p.id);NTX=nt0?nt0.text:'';nsel=null;$('#nph').textContent=p.t;renderNN();show('nn')}
 function renderNN(){const g=$('#nchars');g.replaceChildren();
 for(const c of NN.chars){const b=E('button','av'+(c.id==nsel?' on':''),ini(c.n));b.onclick=()=>{nsel=nsel==c.id?null:c.id;renderNN()};g.append(b)}
 if(!NN.chars.length)g.append(E('span','mu','Belum ada karakter'));
@@ -448,10 +525,10 @@ async function trashUI(){const o=E('div','ov'),s=E('div','sh');o.append(s);
 const draw=async()=>{s.replaceChildren();s.append(E('b','','Tempat Sampah'));const l=(await chapsOf(P.id,1)).filter(c=>c.del).sort((a,b)=>b.del-a.del);
 if(!l.length)s.append(E('p','mu','Tempat sampah kosong.'));
 for(const c of l){const r=E('div','trr'),t=E('div','grow'),pl=E('button','btn','Pulihkan'),hp=E('button','btn dn','Hapus');t.append(E('b','',c.t),E('div','mu',`${c.w||0} kata • dihapus ${ago(c.del)}`));
-pl.onclick=async()=>{delete c.del;c.o=chs.length?Math.max(...chs.map(x=>x.o))+1:0;chs.push(c);P.n=chs.length;await tx(['chapters','projects'],'readwrite',(a,p)=>{a.put({...c});p.put({...P})});renderCh();draw()};
-hp.onclick=async()=>{if(!await yes(`Hapus permanen "${c.t}"? Tindakan ini tidak bisa dibatalkan.`))return;await tx(['chapters','texts','versions'],'readwrite',(a,b,v)=>{a.delete(c.id);b.delete(c.id);dv(v,c.id)});draw()};
+pl.onclick=async()=>{delete c.del;c.o=chs.length?Math.max(...chs.map(x=>x.o))+1:0;chs.push(c);P.n=chs.length;await Store.saveChP(c,P);renderCh();draw()};
+hp.onclick=async()=>{if(!await yes(`Hapus permanen "${c.t}"? Tindakan ini tidak bisa dibatalkan.`))return;await Store.purge([c.id]);draw()};
 r.append(t,pl,hp);s.append(r)}
-if(l.length){const em=E('button','btn dn','Kosongkan Tempat Sampah');em.onclick=async()=>{if(!await yes(`Hapus permanen ${l.length} bab di Tempat Sampah? Tindakan ini tidak bisa dibatalkan.`))return;await tx(['chapters','texts','versions'],'readwrite',(a,b,v)=>{l.forEach(c=>{a.delete(c.id);b.delete(c.id);dv(v,c.id)})});draw()};s.append(em)}
+if(l.length){const em=E('button','btn dn','Kosongkan Tempat Sampah');em.onclick=async()=>{if(!await yes(`Hapus permanen ${l.length} bab di Tempat Sampah? Tindakan ini tidak bisa dibatalkan.`))return;await Store.purge(l.map(c=>c.id));draw()};s.append(em)}
 const x=E('button','btn','Tutup');x.onclick=()=>{o.remove();trSync()};s.append(x)};
 await draw();document.body.append(o)}
 $('#trb').onclick=trashUI;
@@ -473,7 +550,7 @@ if(!wkH.length)cc.append(E('span','mu','Belum ada karakter yang terdeteksi di ba
 const d=$('#wkd');d.replaceChildren();const x=wkH.find(y=>y.c.id==wkSel);$('#wkn').style.display=x?'':'none';if(!x)return;const c=x.c;
 const row=(l,v,cl)=>{if(!v)return;const r=E('div','wkr'),t=E('span','wkv'),i=E('span','',v);t.append(i);if(cl&&v.length>120){i.className='cl';const m=E('button','wkm','Selengkapnya');m.onclick=()=>{i.className='';m.remove()};t.append(m)}r.append(E('span','mu',l),t);d.append(r)};
 row('Nama',c.n);row('Panggilan',c.p);row('Usia',c.a&&(/^\d+$/.test(c.a)?c.a+' tahun':c.a));row('Penampilan',c.l);row('Catatan',c.c,1);row('Di bab ini',x.k+'×');const box=E('div');box.id='wkt';d.append(box);wkTrack(c,box)}
-function wkLoad(){return wkTP||(wkTP=tx('texts','readonly',s=>chs.map(c=>s.get(c.id))).then(r=>{wkTX=r.map(o=>o?o.text:'');return wkTX}))}
+function wkLoad(){return wkTP||(wkTP=Store.many('texts',chs.map(c=>c.id)).then(r=>{wkTX=r.map(o=>o?o.text:'');return wkTX}))}
 async function wkTrack(c,box){const my=wkSel;box.replaceChildren(E('div','mu','Menghitung di semua bab…'));
 await wkLoad();if(wkSel!=my||!$('#ed').classList.contains('wko'))return;
 const rx=wkRx(c,wkFc),res=[];let tot=0;chs.forEach((ch,i)=>{const t=C&&ch.id==C.id?$('#ta').value:wkTX[i],k=wkCount(rx,t||'');if(k){res.push({ch,i,k});tot+=k}});
@@ -552,9 +629,9 @@ $('#fb').onclick=$('#xf').onclick=()=>$('#ed').classList.toggle('focus');
 async function upd(){if(!await yes('Ambil versi terbaru aplikasi? Data novelmu tidak dihapus.','Perbarui'))return;await flush();await ntFlush();if(dirty)return toast('Tulisan belum tersimpan, coba lagi sebentar.');
 try{if(navigator.serviceWorker)await Promise.all((await navigator.serviceWorker.getRegistrations()).map(r=>r.unregister()));if(window.caches)await Promise.all((await caches.keys()).map(k=>caches.delete(k)))}catch(e){}
 toast('Memuat versi terbaru...');setTimeout(()=>location.reload(),300)}
-$('#up').onclick=upd;$('#np').onclick=newP;{let kbW=0,kbM=0;const kbChk=()=>{const v=window.visualViewport,h=v?v.height:innerHeight,w=v?v.width:innerWidth;if(w!==kbW){kbW=w;kbM=0}kbM=Math.max(kbM,h);const op=h<kbM-120;document.body.classList.toggle('sq',op&&document.activeElement===$('#q'))};if(window.visualViewport)visualViewport.addEventListener('resize',kbChk);window.addEventListener('orientationchange',()=>{kbM=0});$('#q').addEventListener('blur',()=>document.body.classList.remove('sq'));kbChk()}$('#ea').onclick=async()=>expo(await tx('projects','readonly',s=>s.getAll()));$('#ia').onclick=()=>$('#imp').click();
-$$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+$('#up').onclick=upd;$('#np').onclick=newP;{let kbW=0,kbM=0;const kbChk=()=>{const v=window.visualViewport,h=v?v.height:innerHeight,w=v?v.width:innerWidth;if(w!==kbW){kbW=w;kbM=0}kbM=Math.max(kbM,h);const op=h<kbM-120;document.body.classList.toggle('sq',op&&document.activeElement===$('#q'))};if(window.visualViewport)visualViewport.addEventListener('resize',kbChk);window.addEventListener('orientationchange',()=>{kbM=0});$('#q').addEventListener('blur',()=>document.body.classList.remove('sq'));kbChk()}$('#ea').onclick=async()=>expo(await Store.all('projects'));$('#ia').onclick=()=>$('#imp').click();
+$$('#nav button[data-s]').forEach(b=>b.onclick=()=>show(b.dataset.s));
 
-(async()=>{db=await open();const s=await tx('settings','readonly',x=>x.get('cfg'));if(s)cfg={...DEF,...s.v};lockWin();migV().catch(()=>{});applyCfg();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();show('lib');
+(async()=>{await Store.open();const s=await Store.get('settings','cfg');if(s)cfg={...DEF,...s.v};lockWin();migV().catch(()=>{});applyCfg();if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();show('lib');
 if('serviceWorker' in navigator){const had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had)flush().then(()=>location.reload())})}})();
 </script></body></html>

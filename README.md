@@ -80,6 +80,21 @@ Biasanya versi baru terpasang sendiri saat aplikasi dibuka, selama ada internet.
 
 ## Riwayat perubahan
 
+### v22.3
+- Keterangan "Jatah dari browser masih tersisa..." di layar Berkas dihapus (HP dan desktop). Yang tersisa hanya baris "Terpakai (perkiraan)" dan status penyimpanan permanen.
+
+### v22.2
+- **Penyesuaian desktop (hanya tampilan).** Tombol Pengaturan teks pindah ke kiri bawah sidebar (di HP tetap di pojok kanan atas Pustaka). Dialog Pengaturan Teks di desktop memakai dua kolom, jadi muat tanpa digulir di jendela yang pendek.
+
+### v22.1
+- **Tata letak desktop (hanya tampilan, tanpa perubahan fungsi).** Di lebar jendela 1024px ke atas aplikasi memakai tiga kolom: daftar bab di kiri (280px), editor di tengah dengan lebar teks dibatasi (780px), dan panel Wiki Karakter di kanan (320px, tanpa peredupan layar). Menu Pustaka, Berkas, dan Cadangan pindah ke sidebar kiri. Pustaka dan Berkas berupa grid kartu, dan dialog tampil di tengah layar. Ada status hover dan fokus keyboard. Di bawah 1024px (HP) tampilan sama seperti v22.0.
+
+### v22.0
+- **Penyimpanan dipisah dari aplikasi (tanpa perubahan tampilan atau fungsi).** Semua akses data kini lewat satu objek `Store` di `index.html`, bukan lagi tersebar di sekitar 30 tempat. Backend-nya masih IndexedDB dan perilakunya sama persis, jadi novel dan pengaturanmu tidak terpengaruh. Ini persiapan agar penyimpanan bisa diganti (misalnya ke folder di komputer) tanpa menyentuh editor, Wiki, Cari & Ganti, dan fitur lainnya. Pengujian: skenario yang sama dijalankan di versi lama dan baru (simpan bab, snapshot, pangkas riwayat, Cari & Ganti semua bab, tempat sampah, hapus novel, ekspor dan impor ZIP), lalu isi database dibandingkan dan hasilnya identik.
+
+### v21.4
+- **Perbaikan keamanan nama di ZIP (zip slip).** Proyek bernama `..` sebelumnya menghasilkan entri `../01 - Bab 1.txt`, yang bisa menulis keluar dari folder tujuan kalau diekstrak dengan alat yang tidak memeriksa jalur. Sekarang nama folder dan berkas di ZIP selalu dibersihkan: karakter kontrol dibuang, titik di awal diganti `_`, titik dan spasi di ujung dibuang (bermasalah di Windows), nama terlarang Windows seperti `CON` dan `NUL` diberi akhiran `_`, panjangnya dibatasi 100 huruf, dan nama kosong menjadi `tanpa-judul`. Nama yang jadi sama setelah dibersihkan diberi nomor `(2)`, `(3)`. Judul asli novel dan bab tetap tersimpan di `_Info.json` dan kembali saat impor.
+
 ### v21.3
 - Autosave dijamin jalan paling lambat 8 detik setelah ketikan pertama yang belum tersimpan, walau kamu belum berhenti mengetik. Sebelumnya, mengetik terus tanpa jeda 1 detik tidak menyimpan apa pun sampai berhenti. Berlaku juga untuk Catatan novel.
 - Jeda simpan menyesuaikan ukuran bab: 1 detik untuk bab biasa, 2 detik untuk bab di atas sekitar 150 KB.
